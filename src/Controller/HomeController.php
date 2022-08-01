@@ -13,7 +13,7 @@ class HomeController extends AbstractController
     public function index(GameRepository $gameRepository): Response
     {
         return $this->render('home/index.html.twig', [
-            'games' => $gameRepository->findAll(),
+            'gamesArray' => $gameRepository->findAll(),
         ]);
     }
 }
