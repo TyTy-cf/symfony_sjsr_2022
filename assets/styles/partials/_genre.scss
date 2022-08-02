@@ -1,13 +1,13 @@
-.cardGenre {
-  width: 280px;
-  height: 130px;
+.card-genre {
+  width: 100%;
+  height: 150px;
   cursor: pointer;
 
-  .cardGenrePicture{
+  .card-genre-picture{
     width: 100%;
     height: 100%;
     position: relative;
-    > img{
+    > img {
       width: 100%;
       height: 100%;
       border-radius: 5%;
@@ -18,7 +18,7 @@
       opacity:0.5;
     }
 
-    .cardGenreDescription{
+    .card-genre-description{
       position: absolute;
       color: white;
       font-weight: bold;

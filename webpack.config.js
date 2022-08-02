@@ -30,6 +30,14 @@ Encore
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
 
+    // ATTENTION
+    // Il faut file loader pour l'utiliser :
+    // yarn add file-loader@^6.0.0 --dev
+    .copyFiles({
+        from: './assets/images',
+        to: 'images/[name].[ext]'
+    })
+
     /*
      * FEATURE CONFIG
      *

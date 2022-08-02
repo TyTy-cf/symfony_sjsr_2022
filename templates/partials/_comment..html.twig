@@ -1,0 +1,14 @@
+
+<div class="card-comment">
+    <div class="title-game">
+        <a href="{{ path('app_game_show', {'slug': comment.game.slug}) }}">
+            {{ comment.game.name }}
+        </a>
+    </div>
+    <p>
+        {{ comment.content|slice(0, 50) }}...
+    </p>
+    <div class="comment-footer">
+        Par <a href="#">{{ comment.account.nickname }}</a>, le {{ comment.createdAt|date('d/m/yy') }}
+    </div>
+</div>

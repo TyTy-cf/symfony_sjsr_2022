@@ -4,3 +4,14 @@ body {
   background-color: $background-color;
   color: $main-color;
 }
+
+.btn-primary {
+  border-radius: 1em;
+  border: solid 0.2rem darken($background-color, 10%);
+  background-color: darken($background-color, 5%);
+
+  &:hover {
+    background-color: $card-game-price-color;
+    border: solid 0.2rem darken($card-game-price-color, 25%);
+  }
+}

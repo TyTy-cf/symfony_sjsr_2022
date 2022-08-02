@@ -1,0 +1,30 @@
+
+@mixin comment-link {
+  > a {
+    color: $card-game-price-color;
+    text-decoration: none;
+    font-size: 1.1rem;
+
+    &:hover {
+      color: #FF9273DF;
+    }
+  }
+}
+
+.card-comment {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  background-color: lighten($background-color, 0.1);
+  padding: 0.4rem 1rem;
+  border: 0.1rem solid darken($main-color, 0.1);
+
+  .title-game {
+    background-color: lighten($background-color, 0.40);
+    @include comment-link;
+  }
+
+  .comment-footer {
+    @include comment-link;
+  }
+}

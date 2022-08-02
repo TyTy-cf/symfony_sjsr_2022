@@ -1,12 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ game[0].name }}
+    {{ gamesArray[0].name }}
 {% endblock %}
 
 {% block body %}
 
     <div class="container">
+        <div class="d-flex justify-content-between">
+            <h1 class="mt-3 mb-4">Tous les jeux</h1>
+        </div>
+        <div class="row">
+            {% for gameIteration in gamesArray %}
+                <div class="col-lg-4 col-md-6">
+                    {% include 'partials/_games.html.twig' with {
+                        'game': gameIteration
+                    } %}
+                </div>
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock %}
