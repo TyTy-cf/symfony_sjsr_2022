@@ -1,5 +1,5 @@
 
-<div class="card-game">
+<a class="card-game" href="{{ path('app_game_show', {'slug': game.slug}) }}">
     <div class="container-image {% if oui is defined %}low-height{% endif %}">
         <img src="{{ game.thumbnailCover }}" alt="{{ game.name }}">
         <div class="container-price">
@@ -9,4 +9,4 @@
     <div class="card-infos">
         <p>{{ game.name }}</p>
     </div>
-</div>
+</a>
