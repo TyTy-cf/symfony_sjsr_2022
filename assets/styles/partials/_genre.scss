@@ -1,0 +1,39 @@
+.cardGenre {
+  width: 280px;
+  height: 130px;
+  cursor: pointer;
+
+  .cardGenrePicture{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    > img{
+      width: 100%;
+      height: 100%;
+      border-radius: 5%;
+      object-fit: cover;
+      object-position: top center;
+      background-repeat: no-repeat;
+      transition: transform .1s;
+      opacity:0.5;
+    }
+
+    .cardGenreDescription{
+      position: absolute;
+      color: white;
+      font-weight: bold;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      font-size: 27px;
+      transition: transform .1s;
+      > p {
+        position: relative;
+      }
+    }
+    &:hover{
+      transform: scale(1.05);
+    }
+  }
+}

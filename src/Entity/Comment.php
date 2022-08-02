@@ -137,4 +137,23 @@ class Comment
         return $this;
     }
 
+    public function getArrayStar(): array {
+        if ($this->rank <= 0.5 && $this->rank > 0) {
+            return [
+                'fa-solid fa-star-half-stroke',
+                'fa-regular fa-star',
+                'fa-regular fa-star',
+                'fa-regular fa-star',
+                'fa-regular fa-star',
+            ];
+        }
+        return [
+            'fa-regular fa-star',
+            'fa-regular fa-star',
+            'fa-regular fa-star',
+            'fa-regular fa-star',
+            'fa-regular fa-star',
+        ];
+    }
+
 }

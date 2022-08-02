@@ -9,6 +9,12 @@
     padding-right: 2rem;
     transition: all 0.5s ease-out;
 
+    &.low-height {
+      height: 240px;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
     > img {
       cursor: pointer;
       border-radius: 2rem;
@@ -27,6 +33,7 @@
       bottom: -2%;
       padding: 0.2rem 0.6rem;
       background-color: $card-game-price-color;
+      color: $card-game-name-color;
       font-size: $card-game-font-size;
       font-weight: 700;
     }

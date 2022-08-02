@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Game;
+use App\Entity\Library;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -24,22 +25,32 @@ class GameRepository extends ServiceEntityRepository
      */
     public function findBySlugRelations(string $slug)
     {
-        // SELECT * FROM game AS game
         return $this->createQueryBuilder('game')
             ->select('game', 'genres', 'publisher', 'countries', 'comments')
-            // JOIN genres ON genres.id = game.genre_id
             ->join('game.genres', 'genres')
-            ->join('game.publisher', 'publisher')
             ->join('game.countries', 'countries')
             ->leftJoin('game.comments', 'comments')
-            // WHERE game.slug = ?
-            // toujours mettre les ":" devant le nom de votre alias
+            ->leftJoin('game.publisher', 'publisher')
             ->where('game.slug = :slug')
-            // Pour chaque alias déclaré, vous avez un setParameter
-            // Le premier paramètre est l'alias et le deuxième la valeur
             ->setParameter('slug', $slug)
             ->getQuery()
             ->getResult()
         ;
     }
+
+    function getGroupedByGameByOrder($orderBy = 'SUM(library.gameTime)', $limit = 9): array {
+        $qb = $this->createQueryBuilder('game')
+            ->leftJoin(Library::class, 'library', Join::WITH, 'library.game = game')
+            ->groupBy('game')
+            ->orderBy($orderBy, 'DESC');
+
+        if ($limit !== null) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()
+            ->getResult()
+        ;
+    }
+
 }
