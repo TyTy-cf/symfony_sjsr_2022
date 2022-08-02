@@ -1,7 +1,7 @@
 
 <div class="card-game">
-    <div class="container-image">
-        <img src="{{ game.thumbnailCover }}">
+    <div class="container-image {% if oui is defined %}low-height{% endif %}">
+        <img src="{{ game.thumbnailCover }}" alt="{{ game.name }}">
         <div class="container-price">
             {{ game.price }}€
         </div>

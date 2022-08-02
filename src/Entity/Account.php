@@ -109,7 +109,9 @@ class Account
 
     public function removeLibrary(Library $library): self
     {
-        $this->libraries->removeElement($library);
+        if ($this->libraries->contains($library)) {
+            $this->libraries->removeElement($library);
+        }
 
         return $this;
     }
@@ -133,7 +135,9 @@ class Account
 
     public function removeComment(Comment $comment): self
     {
-        $this->comments->removeElement($comment);
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+        }
 
         return $this;
     }

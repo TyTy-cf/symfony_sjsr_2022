@@ -45,6 +45,7 @@ class Library
     {
         $this->gameTime = 0.0;
         $this->installed = false;
+        $this->createdAt = new DateTime();
     }
 
     public function getId(): ?int
