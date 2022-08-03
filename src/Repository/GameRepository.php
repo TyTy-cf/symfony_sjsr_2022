@@ -38,7 +38,7 @@ class GameRepository extends ServiceEntityRepository
         ;
     }
 
-    function getGroupedByGameByOrder($orderBy = 'SUM(library.gameTime)', $limit = 9): array {
+    function getGroupedByGameByOrder(string $orderBy = 'SUM(library.gameTime)', int $limit = 9): array {
         $qb = $this->createQueryBuilder('game')
             ->leftJoin(Library::class, 'library', Join::WITH, 'library.game = game')
             ->groupBy('game')

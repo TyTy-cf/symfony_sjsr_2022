@@ -6,9 +6,9 @@
         </a>
     </div>
     <p>
-        {{ comment.content|slice(0, 50) }}...
+        {{ comment.content|excerpt }}
     </p>
     <div class="comment-footer">
-        Par <a href="#">{{ comment.account.nickname }}</a>, le {{ comment.createdAt|date('d/m/yy') }}
+        Par <a href="#">{{ comment.account.nickname }}</a>, le {{ comment.createdAt|date('d/m/Y') }}
     </div>
 </div>
