@@ -153,4 +153,32 @@ class Account
 
         return $this;
     }
+
+    /**
+ * @return DateTime
+ */
+    public function getCreatedAt(): DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param DateTime $createdAt
+     * @return Account
+     */
+    public function setCreatedAt(DateTime $createdAt): Account
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    public function getTotalGameTime(): int {
+        $totalGameTime = 0;
+        foreach ($this->libraries as $library) {
+            /** @var Library $library */
+            $totalGameTime += $library->getGameTime();
+        }
+        return $totalGameTime;
+    }
+
 }

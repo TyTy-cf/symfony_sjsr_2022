@@ -1,0 +1,20 @@
+
+<a class="main-card-account-game row" href="{{ path('app_game_show', {'slug': library.game.slug}) }}">
+    <div class="col-4 p-0 h-100">
+        <div class="container-image-acc-game">
+            <img src="{{ library.game.thumbnailCover }}" alt="{{ library.game.name }}">
+        </div>
+    </div>
+    <div class="col-7 d-flex flex-column justify-content-evenly">
+        <div>
+            <h2>{{ library.game.name }}</h2>
+            <p>{{ library.gameTime }}</p>
+            <p>Dernière utilisation le {{ library.lastUsedAt|date('d/m/Y') }}</p>
+        </div>
+        <p class="m-0">Acheté le {{ library.createdAt|date('d/m/Y') }}</p>
+    </div>
+    <div class="col-1">
+        <div class="mt-2 ms-auto issou-circle {% if library.installed %}green{% endif %}">
+        </div>
+    </div>
+</a>

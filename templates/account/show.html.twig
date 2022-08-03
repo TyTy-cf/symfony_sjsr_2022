@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ account.name }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div>
+            <h3>Ses jeux</h3>
+            <div class="row">
+                {% for library in account.libraries %}
+                    <div class="col-12 p-2">
+                        {% include 'partials/_account_game.html.twig' %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

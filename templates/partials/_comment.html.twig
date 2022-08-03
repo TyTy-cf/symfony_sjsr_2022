@@ -9,6 +9,6 @@
         {{ comment.content|excerpt }}
     </p>
     <div class="comment-footer">
-        Par <a href="#">{{ comment.account.nickname }}</a>, le {{ comment.createdAt|date('d/m/Y') }}
+        Par <a href="{{ path('app_account_show', {'slug': comment.account.slug}) }}">{{ comment.account.nickname }}</a>, le {{ comment.createdAt|date('d/m/Y') }}
     </div>
 </div>
