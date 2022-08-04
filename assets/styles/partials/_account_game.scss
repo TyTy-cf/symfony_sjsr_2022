@@ -6,6 +6,7 @@
   height: 200px;
   width: 100%;
   background-color: lighten($background-color, 15%);
+  transition: all 0.3s ease-out;
 
   .container-image-acc-game {
     overflow: hidden;
@@ -33,6 +34,7 @@
 
   &:hover {
     transform: scale(1.02);
+    transition: all 0.3s ease-in;
     color: white;
   }
 }

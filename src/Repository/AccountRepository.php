@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\Account;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -36,6 +35,7 @@ class AccountRepository extends ServiceEntityRepository
             ->where('account.slug = :slug')
             ->setParameter('slug', $slug)
             ->orderBy('comments.createdAt', 'DESC')
+            ->addOrderBy('libraries.installed', 'DESC')
             ->getQuery()
             ->getOneOrNullResult()
         ;

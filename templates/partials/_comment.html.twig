@@ -6,9 +6,18 @@
         </a>
     </div>
     <p>
-        {{ comment.content|excerpt }}
+        {% if profile is defined %}
+            {{ comment.content }}
+        {% else %}
+            {{ comment.content|excerpt }}
+        {% endif %}
     </p>
     <div class="comment-footer">
-        Par <a href="{{ path('app_account_show', {'slug': comment.account.slug}) }}">{{ comment.account.nickname }}</a>, le {{ comment.createdAt|date('d/m/Y') }}
+        {% if profile is defined %}
+            Rédigé le
+        {% else %}
+            Par <a href="{{ path('app_account_show', {'slug': comment.account.slug}) }}">{{ comment.account.nickname }}</a>, le
+        {% endif %}
+        {{ comment.createdAt|date('d/m/Y') }}
     </div>
 </div>

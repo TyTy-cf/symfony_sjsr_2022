@@ -8,11 +8,56 @@
 
     <div class="container">
         <div>
-            <h3>Ses jeux</h3>
+            <table class="table table-dark table-hover table-striped">
+                <tbody>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ account.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ account.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Pseudo</th>
+                        <td>{{ account.nickname }}</td>
+                    </tr>
+                    <tr>
+                        <th>Inscrit le</th>
+                        <td>{{ account.createdAt|date('d/m/Y') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Porte-feuille</th>
+                        <td>{{ account.wallet }}€</td>
+                    </tr>
+                    <tr>
+                        <th>Temps de jeu total</th>
+                        <td>{{ account.totalGameTime }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="my-5">
+            <h3 class="mb-3">Ses jeux</h3>
             <div class="row">
                 {% for library in account.libraries %}
                     <div class="col-12 p-2">
                         {% include 'partials/_account_game.html.twig' %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="my-2">
+            <h3>Ses commentaires</h3>
+            <div class="row">
+                {% for comment in account.comments %}
+                    <div class="col-lg-3 col-md-6 p-2">
+                        {% include 'partials/_comment.html.twig'
+                            with {
+                                'profile': 1
+                            }
+                        %}
                     </div>
                 {% endfor %}
             </div>
