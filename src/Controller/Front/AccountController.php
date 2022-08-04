@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use App\Repository\AccountRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -20,7 +20,7 @@ class AccountController extends AbstractController
      */
     #[Route('/account/{slug}', name: 'app_account_show')]
     public function show(string $slug): Response {
-        return $this->render('account/show.html.twig', [
+        return $this->render('front/account/show.html.twig', [
             'account' => $this->accountRepository->getAccountBySlug($slug),
         ]);
     }

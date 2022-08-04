@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
+use App\Repository\CommentRepository;
 use App\Repository\GameRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,16 +20,28 @@ class GameController extends AbstractController
 
     #[Route('/', name: 'app_game_index')]
     public function index(): Response {
-        return $this->render('game/index.html.twig', [
+        return $this->render('front/game/index.html.twig', [
             'gamesArray' => $this->gameRepository->findBy([], ['publishedAt' => 'DESC']),
         ]);
     }
 
     #[Route('/{slug}', name: 'app_game_show')]
-    public function show(string $slug): Response
+    public function show(
+        string $slug,
+        Request $request,
+        PaginatorInterface $paginator,
+        CommentRepository $commentRepository
+    ): Response
     {
-        return $this->render('game/show.html.twig', [
+        $comments = $paginator->paginate(
+            $commentRepository->getQueryBuilderByGame($slug),
+            $request->query->getInt('page', 1),
+            6
+        );
+
+        return $this->render('front/game/show.html.twig', [
             'game' => $this->gameRepository->findBySlugRelations($slug),
+            'comments' => $comments
         ]);
     }
 }

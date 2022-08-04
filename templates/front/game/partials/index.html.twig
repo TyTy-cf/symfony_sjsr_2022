@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello GameDetailController!{% endblock %}
+
+{% block body %}
+    {% include 'partial/topBackGround.html.twig' with { 'image': game[0].thumbnailCover } %}
+
+{# Card with glass effect #}
+    <section>
+        <div class="container">
+
+            {% include 'game_detail/topCard.html.twig' %}
+
+            {% include 'game_detail/shortDescribe.html.twig' %}
+
+            {% include 'game_detail/table.html.twig' %}
+
+            {% include 'game_detail/description.html.twig' %}
+
+            <h2 class="mb-5">Commentaires</h2>
+            <div class="row">
+                {% for comment in comments %}
+                    <div class="col-md-6">
+                        {% include 'partial/commentCard.html.twig' with {
+                            'comment': comment[0],
+                            'username': comment.username,
+                        } %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <h2 class="mb-5">Produits similaires</h2>
+            <div class="row">
+                {% for game in gamesSameGenre %}
+                    <div class="col-md-4">
+                        {% include 'partial/card.html.twig' %}
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

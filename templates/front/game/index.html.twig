@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/base.html.twig' %}
 
 {% block title %}
 {% endblock %}
@@ -12,7 +12,7 @@
         <div class="row">
             {% for gameIteration in gamesArray %}
                 <div class="col-lg-4 col-md-6">
-                    {% include 'partials/_games.html.twig' with {
+                    {% include 'front/partials/_games.html.twig' with {
                         'game': gameIteration
                     } %}
                 </div>

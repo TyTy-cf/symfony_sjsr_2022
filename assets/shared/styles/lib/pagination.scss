@@ -1,0 +1,28 @@
+
+.pagination {
+
+  .current {
+    color: white;
+    border-radius: 2.5rem;
+    text-decoration: none;
+    padding: 0.2rem 0.8rem;
+    background-color: $card-game-price-color;
+  }
+
+  .page, .first, .last, .previous, .next {
+    > a {
+      color: white;
+      margin-left: 0.2rem;
+      margin-right: 0.2rem;
+      border-radius: 2.5rem;
+      text-decoration: none;
+      padding: 0.2rem 0.8rem;
+      background-color: lighten($background-color, 10%);
+
+      &:hover {
+        background-color: $card-game-price-color;
+      }
+    }
+  }
+
+}

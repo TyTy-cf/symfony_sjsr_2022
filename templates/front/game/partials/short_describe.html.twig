@@ -1,0 +1,28 @@
+<div class="d-flex flex-wrap justify-content-end">
+    <div class="tableDesc">
+        <table>
+            <tr>
+                <th>Date de sortie : </th>
+                <td>{{ game.publishedAt|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Editeur :</th>
+                <td>{% if game.publisher is not null %}
+                        {{ game.publisher.name}}
+                    {% else %}
+                        inconnu
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Genre :</th>
+                <td>
+                    {% for genre in game.genres %}
+                        {{ genre.name }}
+                        {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

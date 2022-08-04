@@ -18,7 +18,7 @@ class HomeController extends AbstractController
         GenreRepository $genreRepository
     ): Response
     {
-        return $this->render('home/index.html.twig', [
+        return $this->render('front/home/index.html.twig', [
             'mostPlayedGames' => $gameRepository->getGroupedByGameByOrder(),
             'lastPublished' => $gameRepository->findBy([], ['publishedAt' => 'DESC'], 4),
             'lastComments' => $commentRepository->findBy([], ['createdAt' => 'DESC'], 4),

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Game;
 use App\Entity\Library;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -22,19 +23,19 @@ class GameRepository extends ServiceEntityRepository
     }
 
     /**
+     * @throws NonUniqueResultException
      */
-    public function findBySlugRelations(string $slug)
+    public function findBySlugRelations(string $slug): ?Game
     {
         return $this->createQueryBuilder('game')
-            ->select('game', 'genres', 'publisher', 'countries', 'comments')
+            ->select('game', 'genres', 'publisher', 'countries')
             ->join('game.genres', 'genres')
             ->join('game.countries', 'countries')
-            ->leftJoin('game.comments', 'comments')
             ->leftJoin('game.publisher', 'publisher')
             ->where('game.slug = :slug')
             ->setParameter('slug', $slug)
             ->getQuery()
-            ->getResult()
+            ->getOneOrNullResult()
         ;
     }
 

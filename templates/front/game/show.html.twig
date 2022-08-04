@@ -1,0 +1,45 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}
+    {{ game.name }}
+{% endblock %}
+
+{% block body %}
+
+    <section>
+        <div class="container">
+
+            {% include 'front/game/partials/top_card.html.twig' %}
+
+            {% include 'front/game/partials/short_describe.html.twig' %}
+
+            <h2 class="my-4" id="description">Description</h2>
+
+            <p class="darkWhite">{{ game.description }}</p>
+
+            <h2 class="mb-3">Commentaires</h2>
+            <div class="row mb-5">
+                {% for comment in comments %}
+                    <div class="col-md-6 my-2">
+                        {% include 'front/partials/_comment.html.twig' %}
+                    </div>
+                {% endfor %}
+
+                <div class="navigation d-flex justify-content-center mt-2">
+                    {{ knp_pagination_render(comments) }}
+                </div>
+            </div>
+
+{#            <h2 class="mb-5">Produits similaires</h2>#}
+{#            <div class="row">#}
+{#                {% for game in gamesSameGenre %}#}
+{#                    <div class="col-md-4">#}
+{#                        {% include 'partial/card.html.twig' %}#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+
+        </div>
+    </section>
+
+{% endblock %}

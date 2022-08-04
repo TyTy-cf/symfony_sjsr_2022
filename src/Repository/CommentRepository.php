@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Account;
 use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,4 +20,15 @@ class CommentRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Comment::class);
     }
+
+    public function getQueryBuilderByGame(string $slug): QueryBuilder
+    {
+        return $this->createQueryBuilder('comment')
+            ->join('comment.game', 'game')
+            ->where('game.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->orderBy('comment.createdAt', 'DESC')
+        ;
+    }
+
 }

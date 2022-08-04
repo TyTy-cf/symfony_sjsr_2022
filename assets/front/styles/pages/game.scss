@@ -1,0 +1,159 @@
+
+// Header part
+section{
+  .container{
+    align-self: center;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: -230px;
+    position: relative;
+
+    .imageCard, .glassCard{
+      margin: 1rem;
+      border-radius: 1rem;
+      box-shadow: rgb(39,39,39) 0 0 20px;
+    }
+
+    .imageCard{
+      width: 616px;
+      height: 355px;
+
+      img{
+        width: 100%;
+        height: 100%;
+        border-radius: 1rem;
+        object-fit: cover;
+        object-position: top;
+      }
+    }
+
+    .glassCard{
+      background-color: rgba(58, 58, 58, 0.15);
+      backdrop-filter: blur(30px);
+      width: 524px;
+      height: 355px;
+      padding: 1rem;
+
+      .flag{
+        height: 120px;
+        margin-left: 6rem;
+      }
+
+
+      .price{
+
+        .realPrice{
+          font-size: 1.2rem;
+          margin-right: 1rem;
+        }
+
+        .promo{
+          color: #ff5400;
+          font-size: 1.2rem;
+          margin-right: 1rem;
+        }
+
+        .newPrice{
+          font-size: 2.5rem;
+        }
+      }
+
+      .card_buy{
+        width: 100%;
+
+        .btn{
+          background-color: #ff5400;
+          color: white;
+          width: 100%;
+          padding: 1rem;
+          border-radius: .7rem;
+
+          &:hover{
+            background-color: #ffa700;
+          }
+
+        }
+      }
+    }
+
+    .leftDesc{
+      width: 616px;
+      height: 355px;
+
+      p, a{
+        color: rgba(222, 222, 222, 0.78);
+      }
+      a{
+        text-decoration: underline;
+      }
+    }
+
+    .rightDesc{
+      width: 524px;
+      height: 355px;
+
+      .pill{
+        border-radius: 50%;
+        padding: 1.2rem 1rem;
+        width: fit-content;
+        font-weight: bold;
+      }
+      .nbComment{
+        color: rgba(222, 222, 222, 0.78);
+
+        span{
+          color: white;
+        }
+      }
+
+      .tableDesc{
+        table{
+          border-collapse: separate;
+          border-spacing: 3rem 1rem;
+          position: relative;
+          left: -50px;
+          tr{
+
+            th{
+              color: rgba(222, 222, 222, 0.78);
+              font-weight: normal;
+            }
+
+            td{
+              color: white;
+            }
+          }
+        }
+      }
+    }
+
+    .configuration{
+      p{
+        font-size: 1.2rem;
+      }
+      table{
+        border-collapse: separate;
+        border-spacing: 3rem .5rem;
+        position: relative;
+        left: -50px;
+        tr{
+
+          th, td{
+            color: rgba(222, 222, 222, 0.78);
+            font-weight: normal;
+          }
+        }
+      }
+    }
+
+    .darkWhite{
+      color: rgba(222, 222, 222, 0.78);
+    }
+    .subtitle{
+      font-size: 1.4rem;
+    }
+  }
+}
+

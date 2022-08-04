@@ -1,10 +1,11 @@
 
-@import "lib/bootstrap";
-
+@import "../../shared/styles/main";
+@import "main/general";
 @import "main/variables";
 @import "main/general";
 
 @import "pages/home";
+@import "pages/game";
 
 @import "partials/game";
 @import "partials/genre";

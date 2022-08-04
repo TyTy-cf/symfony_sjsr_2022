@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/base.html.twig' %}
 
 {% block title %}
     {{ account.name }}
@@ -30,7 +30,7 @@
             <div class="row">
                 {% for library in account.libraries %}
                     <div class="col-12 p-2">
-                        {% include 'partials/_account_game.html.twig' %}
+                        {% include 'front/partials/_account_game.html.twig' %}
                     </div>
                 {% endfor %}
             </div>
@@ -41,7 +41,7 @@
             <div class="row">
                 {% for comment in account.comments %}
                     <div class="col-lg-3 col-md-6 p-2">
-                        {% include 'partials/_comment.html.twig'
+                        {% include 'front/partials/_comment.html.twig'
                             with {
                                 'profile': 1
                             }

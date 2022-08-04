@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/base.html.twig' %}
 
 {% block title %}VaPeuR-iSH{% endblock %}
 
@@ -16,7 +16,7 @@
         <div class="row">
             {% for gameIteration in mostPlayedGames %}
                 <div class="col-lg-4 col-md-6">
-                    {% include 'partials/_games.html.twig' with {
+                    {% include 'front/partials/_games.html.twig' with {
                         'game': gameIteration
                     } %}
                 </div>
@@ -35,7 +35,7 @@
         <div class="row">
             {% for gameIteration in lastPublished %}
                 <div class="col-lg-3 col-md-6">
-                    {% include 'partials/_games.html.twig' with {
+                    {% include 'front/partials/_games.html.twig' with {
                         'game': gameIteration,
                         'lowHeight': 1
                     } %}
@@ -49,7 +49,7 @@
         <div class="row">
             {% for comment in lastComments %}
                 <div class="col-lg-3 col-md-6 my-2 my-lg-0">
-                    {% include 'partials/_comment.html.twig' %}
+                    {% include 'front/partials/_comment.html.twig' %}
                 </div>
             {% endfor %}
         </div>
@@ -67,7 +67,7 @@
         <div class="row">
             {% for gameIteration in mostSellers %}
                 <div class="col-lg-4 col-md-6">
-                    {% include 'partials/_games.html.twig' with {
+                    {% include 'front/partials/_games.html.twig' with {
                         'game': gameIteration,
                     } %}
                 </div>
@@ -80,7 +80,7 @@
         <div class="row">
             {% for genre in genres %}
                 <div class="col-lg-4 col-md-6 my-3">
-                    {% include '/partials/_genres.html.twig' %}
+                    {% include 'front/partials/_genres.html.twig' %}
                 </div>
             {% endfor %}
         </div>
