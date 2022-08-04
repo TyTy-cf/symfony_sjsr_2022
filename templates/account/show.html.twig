@@ -11,14 +11,6 @@
             <table class="table table-dark table-hover table-striped">
                 <tbody>
                     <tr>
-                        <th>Nom</th>
-                        <td>{{ account.name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>{{ account.email }}</td>
-                    </tr>
-                    <tr>
                         <th>Pseudo</th>
                         <td>{{ account.nickname }}</td>
                     </tr>
@@ -27,12 +19,8 @@
                         <td>{{ account.createdAt|date('d/m/Y') }}</td>
                     </tr>
                     <tr>
-                        <th>Porte-feuille</th>
-                        <td>{{ account.wallet }}€</td>
-                    </tr>
-                    <tr>
                         <th>Temps de jeu total</th>
-                        <td>{{ account.totalGameTime }}</td>
+                        <td>{{ account.totalGameTime|time_converter }}</td>
                     </tr>
                 </tbody>
             </table>

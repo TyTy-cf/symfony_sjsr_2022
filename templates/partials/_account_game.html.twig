@@ -8,7 +8,7 @@
     <div class="col-7 d-flex flex-column justify-content-evenly">
         <div>
             <h2>{{ library.game.name }}</h2>
-            <p>{{ library.gameTime }}</p>
+            <p>{{ library.gameTime|time_converter }}</p>
             <p>Dernière utilisation le {{ library.lastUsedAt|date('d/m/Y') }}</p>
         </div>
         <p class="m-0">Acheté le {{ library.createdAt|date('d/m/Y') }}</p>
