@@ -1,0 +1,84 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+    Les comptes
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <table class="table table-dark table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        {{
+                            knp_pagination_sortable(
+                                accounts,
+                                'Nom',
+                                'account.name'
+                            )|raw
+                        }}
+                    </th>
+                    <th>
+                        {{
+                            knp_pagination_sortable(
+                                accounts,
+                                'Email',
+                                'account.email'
+                            )|raw
+                        }}
+                    </th>
+                    <th>
+                        {{
+                            knp_pagination_sortable(
+                                accounts,
+                                'Pseudo',
+                                'account.nickname'
+                            )|raw
+                        }}
+                    </th>
+                    <th>
+                        {{
+                            knp_pagination_sortable(
+                                accounts,
+                                'Inscrit le',
+                                'account.createdAt'
+                            )|raw
+                        }}
+                    </th>
+                    <th>
+                        {{
+                            knp_pagination_sortable(
+                                accounts,
+                                'Porte-feuille',
+                                'account.wallet'
+                            )|raw
+                        }}
+                    </th>
+                    <th>
+                        {{
+                        knp_pagination_sortable(
+                            accounts,
+                            'Nombre de jeux',
+                            'nbGames'
+                        )|raw
+                        }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for account in accounts %}
+                    <tr>
+                        <td>{{ account[0].name }}</td>
+                        <td>{{ account[0].email }}</td>
+                        <td>{{ account[0].nickname }}</td>
+                        <td>{{ account[0].createdAt | date('d/m/Y') }}</td>
+                        <td>{{ account[0].wallet }}€</td>
+                        <td>{{ account['nbGames'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

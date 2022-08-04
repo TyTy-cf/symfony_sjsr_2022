@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Account;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -38,6 +39,15 @@ class AccountRepository extends ServiceEntityRepository
             ->addOrderBy('libraries.installed', 'DESC')
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    public function queryBuilderAll(): QueryBuilder
+    {
+        return $this->createQueryBuilder('account')
+            ->select('account', 'COUNT(libraries) AS nbGames')
+            ->leftJoin('account.libraries', 'libraries')
+            ->groupBy('account')
         ;
     }
 }
