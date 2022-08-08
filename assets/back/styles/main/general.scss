@@ -1,0 +1,53 @@
+
+.admin-menu {
+  a {
+    text-decoration: none;
+    color: #dfdfdf;
+
+    &:hover {
+      color: $card-game-price-color;
+    }
+
+    &.menu-active {
+      color: $card-game-price-color;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.sortable,
+.asc,
+.desc {
+  text-decoration: none;
+  color: #dfdfdf;
+
+  &:hover {
+    text-decoration: none;
+    color: $card-game-price-color;
+  }
+
+  &:after {
+    content: '⬍';
+    padding-left: 0.4rem;
+    font-weight: 900;
+  }
+
+  &.asc {
+    &:after {
+      padding-left: 0.4rem;
+      content: '▴';
+      position: relative;
+      top: -5px;
+    }
+  }
+
+  &.desc {
+    &:after {
+      padding-left: 0.4rem;
+      content: '▾';
+      position: relative;
+      top: 5px;
+    }
+  }
+
+}

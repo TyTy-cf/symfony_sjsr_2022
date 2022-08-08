@@ -10,11 +10,13 @@
 
     <div class="container-fluid">
 
-        <a  class="btn btn-primary my-3 float-end"
-            href="{{ path('app_admin_country_index') }}"
-        >
-            Les pays
-        </a>
+        <div class="d-flex justify-content-end">
+            <a  class="btn btn-primary my-3 float-end"
+                href="{{ path('app_admin_country_index') }}"
+            >
+                Les pays
+            </a>
+        </div>
 
         <div class="col-6 mt-3">
             {{ form_start(form) }}

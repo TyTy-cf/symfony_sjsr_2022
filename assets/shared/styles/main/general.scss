@@ -10,8 +10,9 @@ body {
   border: solid 0.2rem darken($background-color, 10%);
   background-color: darken($background-color, 5%);
 
-  &:hover {
+  &:hover, &:focus, &:active {
     background-color: $card-game-price-color;
     border: solid 0.2rem darken($card-game-price-color, 25%);
+    box-shadow: 0 0 0 0.25rem lighten($card-game-price-color, 30%);
   }
 }

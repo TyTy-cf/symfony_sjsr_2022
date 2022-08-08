@@ -3,6 +3,7 @@
 namespace App\Controller\Front;
 
 use App\Entity\Account;
+use App\Form\AccountProfileType;
 use App\Form\AccountRegisterType;
 use App\Repository\AccountRepository;
 use App\Service\TextService;
@@ -26,9 +27,25 @@ class AccountController extends AbstractController
      * @throws NonUniqueResultException
      */
     #[Route('/account/{slug}', name: 'app_account_show')]
-    public function show(string $slug): Response {
+    public function show(
+        Request $request,
+        string $slug
+    ): Response {
+
+        $account = $this->accountRepository->getAccountBySlug($slug);
+
+        $form = $this->createForm(AccountProfileType::class, $account);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Account $data */
+            $this->em->persist($form->getData());
+            $this->em->flush();
+        }
+
         return $this->render('front/account/show.html.twig', [
-            'account' => $this->accountRepository->getAccountBySlug($slug),
+            'account' => $account,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -41,7 +58,7 @@ class AccountController extends AbstractController
             /** @var Account $data */
             $data = $form->getData();
             $data->setSlug($this->textService->slugify($data->getName()));
-            $this->em->persist($form->getData());
+            $this->em->persist($data);
             $this->em->flush();
             return $this->redirectToRoute('app_home');
         }

@@ -23,7 +23,7 @@ class PublisherController extends AbstractController
         private PublisherRepository $publisherRepository
     ) { }
 
-    #[Route('/', name: 'app_publisher_admin_index')]
+    #[Route('/', name: 'app_admin_publisher_index')]
     public function index(
         PaginatorInterface $paginator,
         Request $request
@@ -40,7 +40,7 @@ class PublisherController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_publisher_admin_new')]
+    #[Route('/new', name: 'app_admin_publisher_new')]
     public function new(Request $request): Response
     {
         $form = $this->createForm(PublisherType::class, new Publisher());

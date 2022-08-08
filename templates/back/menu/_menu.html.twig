@@ -1,15 +1,30 @@
 
-<div class="ps-2 pt-4">
+<div class="ps-4 pt-4 admin-menu">
 
+    <h4>Comptes</h4>
+    <ul class="list-unstyled ps-4">
+        <li>
+            <a  href="{{ path('app_admin_account_index') }}"
+                class="{% if app.request.pathinfo == path('app_admin_account_index') %}menu-active{% endif %}"
+            >
+                Liste des comptes
+            </a>
+        </li>
+    </ul>
+    <hr>
     <h4>Editeurs</h4>
     <ul class="list-unstyled ps-4">
         <li>
-            <a href="{{ path('app_publisher_admin_index') }}">
+            <a  href="{{ path('app_admin_publisher_index') }}"
+                class="{% if app.request.pathinfo == path('app_admin_publisher_index') %}menu-active{% endif %}"
+            >
                 Liste des éditeurs
             </a>
         </li>
         <li>
-            <a href="{{ path('app_publisher_admin_new') }}">
+            <a href="{{ path('app_admin_publisher_new') }}"
+               class="{% if app.request.pathinfo == path('app_admin_publisher_new') %}menu-active{% endif %}"
+            >
                 Ajouter un éditeur
             </a>
         </li>
@@ -19,12 +34,16 @@
     <h4>Pays</h4>
     <ul class="list-unstyled ps-4">
         <li>
-            <a href="{{ path('app_admin_country_index') }}">
+            <a href="{{ path('app_admin_country_index') }}"
+               class="{% if app.request.pathinfo == path('app_admin_country_index') %}menu-active{% endif %}"
+            >
                 Liste des pays
             </a>
         </li>
         <li>
-            <a href="{{ path('app_admin_country_new') }}">
+            <a href="{{ path('app_admin_country_new') }}"
+               class="{% if app.request.pathinfo == path('app_admin_country_new') %}menu-active{% endif %}"
+            >
                 Ajouter un pays
             </a>
         </li>
