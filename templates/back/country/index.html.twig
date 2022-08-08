@@ -1,0 +1,81 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+    Les pays
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+
+        <a  class="btn btn-primary my-3 float-end"
+            href="{{ path('app_admin_country_new') }}"
+        >
+            Nouveau
+        </a>
+
+        <table class="table table-dark table-hover table-striped">
+            <thead>
+            <tr>
+                <th>
+                    {{
+                    knp_pagination_sortable(
+                        countries,
+                        'Nom',
+                        'country.name'
+                    )|raw
+                    }}
+                </th>
+                <th>
+                    {{
+                    knp_pagination_sortable(
+                        countries,
+                        'Nationalité',
+                        'country.nationality'
+                    )|raw
+                    }}
+                </th>
+                <th>
+                    {{
+                    knp_pagination_sortable(
+                        countries,
+                        'Code',
+                        'country.code'
+                    )|raw
+                    }}
+                </th>
+                <th>
+                    Drapeau
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for country in countries %}
+                <tr>
+                    <td>{{ country.name }}</td>
+                    <td>{{ country.nationality }}</td>
+                    <td>{{ country.code }}</td>
+                    <td>
+                        <img src="{{ country.urlFlag }}"
+                             alt="{{ country.name }}"
+                        >
+                    </td>
+                    <td>
+                        <a href="{{ path('app_admin_country_edit', {'slug': country.slug}) }}">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation d-flex justify-content-center mt-2">
+            {{ knp_pagination_render(countries) }}
+        </div>
+    </div>
+
+{% endblock %}
