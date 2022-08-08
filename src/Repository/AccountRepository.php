@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Account;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -14,7 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Account[]    findAll()
  * @method Account[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AccountRepository extends ServiceEntityRepository
+class AccountRepository extends AbstractVapeurIshRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -42,11 +41,12 @@ class AccountRepository extends ServiceEntityRepository
         ;
     }
 
-    public function queryBuilderAll(): QueryBuilder
+    public function getQbAll(): QueryBuilder
     {
-        return $this->createQueryBuilder('account')
-            ->select('account', 'COUNT(libraries) AS nbGames')
+        $qb = parent::getQbAll();
+        return $qb->select('account', 'country', 'COUNT(libraries) AS nbGames')
             ->leftJoin('account.libraries', 'libraries')
+            ->leftJoin('account.country', 'country')
             ->groupBy('account')
         ;
     }

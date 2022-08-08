@@ -12,6 +12,15 @@
                 <tr>
                     <th>
                         {{
+                        knp_pagination_sortable(
+                            accounts,
+                            'Pays',
+                            'country.nationality'
+                        )|raw
+                        }}
+                    </th>
+                    <th>
+                        {{
                             knp_pagination_sortable(
                                 accounts,
                                 'Nom',
@@ -69,6 +78,13 @@
             <tbody>
                 {% for account in accounts %}
                     <tr>
+                        <td>
+                            {% if account[0].country is not null %}
+                                <img src="{{ account[0].country.urlFlag }}"
+                                     alt="{{ account[0].country.name }}"
+                                >
+                            {% endif %}
+                        </td>
                         <td>{{ account[0].name }}</td>
                         <td>{{ account[0].email }}</td>
                         <td>{{ account[0].nickname }}</td>

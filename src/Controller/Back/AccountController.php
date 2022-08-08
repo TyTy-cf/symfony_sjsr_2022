@@ -20,7 +20,7 @@ class AccountController extends AbstractController
     ): Response
     {
         $accounts = $paginator->paginate(
-            $accountRepository->queryBuilderAll(),
+            $accountRepository->getQbAll(),
             $request->query->getInt('page', 1),
             15
         );

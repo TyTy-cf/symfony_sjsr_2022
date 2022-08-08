@@ -28,7 +28,6 @@ class CountryController extends AbstractController
         PaginatorInterface $paginator,
         CountryRepository $countryRepository
     ): Response {
-
         $countries = $paginator->paginate(
             $countryRepository->getQbAll(),
             $request->query->getInt('page', 1),
