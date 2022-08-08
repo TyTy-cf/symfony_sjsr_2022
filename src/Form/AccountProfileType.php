@@ -7,6 +7,7 @@ use App\Entity\Country;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,6 +32,11 @@ class AccountProfileType extends AbstractType
                         ->orderBy('p.nationality', 'ASC')
                     ;
                 }
+            ])
+            ->add('pathImage', FileType::class, [
+                'label' => 'Image profil',
+                'mapped' => false,
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',

@@ -15,36 +15,46 @@
                     Modifier mon compte
                 </button>
             </div>
-            <table class="table table-dark table-hover table-striped table-account">
-                <tbody>
-                    <tr>
-                        <th>Pseudo</th>
-                        <td>{{ account.nickname }}</td>
-                    </tr>
-                    <tr>
-                        <th>Inscrit le</th>
-                        <td>{{ account.createdAt|date('d/m/Y') }}</td>
-                    </tr>
-                    <tr>
-                        <th>Temps de jeu total</th>
-                        <td>{{ account.totalGameTime|time_converter }}</td>
-                    </tr>
-                    {% if account.country is not null %}
+            <div class="row">
+                <div class="col-3">
+                    <img class="img-fluid rounded-circle"
+                         alt="{{ account.pathImage }}"
+                         src="{{ account.pathImage }}"
+                    >
+                </div>
+                <div class="col-9">
+                    <table class="table table-dark table-hover table-striped table-account">
+                        <tbody>
                         <tr>
-                            <th>Nationalité</th>
-                            <td>
-                                <img src="{{ account.country.urlFlag }}"
-                                     alt="{{ account.country.name }}"
-                                >
-                            </td>
+                            <th>Pseudo</th>
+                            <td>{{ account.nickname }}</td>
                         </tr>
-                    {% endif %}
-                </tbody>
-            </table>
-        </div>
-        <div class="d-none form-profile-user">
-            {{ form_start(form) }}
-            {{ form_end(form) }}
+                        <tr>
+                            <th>Inscrit le</th>
+                            <td>{{ account.createdAt|date('d/m/Y') }}</td>
+                        </tr>
+                        {% if account.country is not null %}
+                            <tr>
+                                <th>Nationalité</th>
+                                <td>
+                                    <img src="{{ account.country.urlFlag }}"
+                                         alt="{{ account.country.name }}"
+                                    >
+                                </td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <th>Temps de jeu total</th>
+                            <td>{{ account.totalGameTime|time_converter }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-none form-profile-user">
+                        {{ form_start(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="my-5">
             <h3 class="mb-3">Ses jeux</h3>
