@@ -22,7 +22,6 @@ class PublisherType extends AbstractType
             ->add('createdAt', DateType::class, [
                 'widget' => 'single_text',
                 'attr' => [
-                    'min' => date('1980-01-01'),
                     'max' => date('Y-m-d')
                 ]
             ])

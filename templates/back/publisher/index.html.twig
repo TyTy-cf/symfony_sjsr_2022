@@ -1,9 +1,84 @@
 {% extends 'back/base.html.twig' %}
 
 {% block title %}
-    Les éditeurs de jeux
+    Les éditeurs
 {% endblock %}
 
 {% block body %}
+
+    <div class="container-fluid">
+        <table class="table table-dark table-hover table-striped">
+            <thead>
+            <tr>
+                <th>
+                    {{
+                    knp_pagination_sortable(
+                        publishers,
+                        'Nom',
+                        'publishers.name'
+                    )|raw
+                    }}
+                </th>
+                <th>
+                    {{
+                    knp_pagination_sortable(
+                        publishers,
+                        'Website',
+                        'publishers.website'
+                    )|raw
+                    }}
+                </th>
+                <th>
+                    {{
+                    knp_pagination_sortable(
+                        publishers,
+                        'Créé le',
+                        'publishers.createdAt'
+                    )|raw
+                    }}
+                </th>
+                <th>
+                    {{
+                    knp_pagination_sortable(
+                        publishers,
+                        'Pays',
+                        'country.name'
+                    )|raw
+                    }}
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for publisher in publishers %}
+                <tr>
+                    <td>{{ publisher.name }}</td>
+                    <td>
+                        <a href="{{ publisher.website }}" target="_blank">
+                            {{ publisher.website }}
+                        </a>
+                    </td>
+                    <td>{{ publisher.createdAt | date('d/m/Y') }}</td>
+                    <td>
+                        <img src="{{ publisher.country.urlFlag }}"
+                             alt="{{ publisher.country.name }}"
+                        >
+                    </td>
+                    <td>
+                        <a  href="{{ path('app_publisher_admin_edit', {'slug': publisher.slug}) }}">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation d-flex justify-content-center mt-2">
+            {{ knp_pagination_render(publishers) }}
+        </div>
+    </div>
 
 {% endblock %}

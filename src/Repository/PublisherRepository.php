@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Publisher;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,5 +17,13 @@ class PublisherRepository extends AbstractVapeurIshRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Publisher::class);
+    }
+
+    public function getQbAll(): QueryBuilder
+    {
+        $qb = parent::getQbAll();
+        return $qb->select('publisher', 'country')
+            ->leftJoin('publisher.country', 'country')
+        ;
     }
 }
