@@ -21,7 +21,7 @@ class AccountController extends AbstractController
     {
         $accounts = $paginator->paginate(
             $accountRepository->getQbAll(),
-            $request->query->getInt('page', 1),
+            $request->query->getInt('page', 1), // randomurl?page=2
             15
         );
 

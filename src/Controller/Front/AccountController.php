@@ -53,6 +53,7 @@ class AccountController extends AbstractController
     public function register(Request $request): Response {
         $form = $this->createForm(AccountRegisterType::class, new Account());
         $form->handleRequest($request);
+//        $form->setData($_POST['account_register[email]']);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Account $data */
