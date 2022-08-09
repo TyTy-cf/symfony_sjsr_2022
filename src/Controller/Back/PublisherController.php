@@ -52,7 +52,7 @@ class PublisherController extends AbstractController
             $data->setSlug($this->textService->slugify($data->getName()));
             $this->em->persist($data);
             $this->em->flush();
-            return $this->redirectToRoute('app_publisher_admin_index');
+            return $this->redirectToRoute('app_admin_publisher_index');
         }
 
         return $this->render('back/publisher/new.html.twig', [
@@ -72,7 +72,7 @@ class PublisherController extends AbstractController
             $data->setSlug($this->textService->slugify($data->getName()));
             $this->em->persist($data);
             $this->em->flush();
-            return $this->redirectToRoute('app_publisher_admin_index');
+            return $this->redirectToRoute('app_admin_publisher_index');
         }
 
         return $this->render('back/publisher/new.html.twig', [
