@@ -1,21 +1,26 @@
 
 function hideShowFormProfile() {
-    const btnHideShow: HTMLButtonElement = document.querySelector('.btn-edit-profile');
+    const btnHideShow: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.btn-hide-show');
     if (btnHideShow) {
-        btnHideShow.addEventListener('click', () => {
-            const formProfile: HTMLDivElement = document.querySelector('.form-profile-user');
-            const tableProfile: HTMLTableElement = document.querySelector('.table-account');
-            if (formProfile.classList.contains('d-none')) {
-                formProfile.classList.remove('d-none')
-                tableProfile.classList.add('d-none')
-            } else {
-                formProfile.classList.add('d-none')
-                tableProfile.classList.remove('d-none')
-            }
-        });
+        btnHideShow.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const dataClassFirstElem: string = btn.getAttribute('data-class-first-element');
+                const dataClassSecondElem: string = btn.getAttribute('data-class-second-element');
+                const firstHtmlElement: HTMLElement = document.querySelector('.' + dataClassFirstElem);
+                const secondHtmlElement: HTMLElement = document.querySelector('.' + dataClassSecondElem);
+                if (secondHtmlElement.classList.contains('d-none')) {
+                    secondHtmlElement.classList.remove('d-none')
+                    firstHtmlElement.classList.add('d-none')
+                } else {
+                    secondHtmlElement.classList.add('d-none')
+                    firstHtmlElement.classList.remove('d-none')
+                }
+            });
+        })
     }
 }
 
 window.addEventListener('load', () => {
+    console.log(window.location.href);
     hideShowFormProfile();
 });
