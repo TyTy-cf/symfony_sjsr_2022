@@ -7,6 +7,7 @@ use App\Entity\Library;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -15,7 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Game[]    findAll()
  * @method Game[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GameRepository extends ServiceEntityRepository
+class GameRepository extends AbstractVapeurIshRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -54,4 +55,11 @@ class GameRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getQbAll(): QueryBuilder
+    {
+        $qb = parent::getQbAll();
+        return $qb->select('game', 'publisher')
+            ->leftJoin('game.publisher', 'publisher')
+        ;
+    }
 }

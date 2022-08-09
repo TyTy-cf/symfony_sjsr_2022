@@ -6,6 +6,7 @@ use App\Entity\Account;
 use App\Form\AccountProfileType;
 use App\Form\AccountRegisterType;
 use App\Repository\AccountRepository;
+use App\Service\FileUploader;
 use App\Service\TextService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
@@ -29,6 +30,7 @@ class AccountController extends AbstractController
     #[Route('/account/{slug}', name: 'app_account_show')]
     public function show(
         Request $request,
+        FileUploader $fileUploader,
         string $slug
     ): Response {
 
@@ -39,7 +41,15 @@ class AccountController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Account $data */
-            $this->em->persist($form->getData());
+            $data = $form->getData();
+            if ($form->get('pathImage')->getData() !== null) {
+                $file = $fileUploader->uploadFile(
+                    $form->get('pathImage')->getData(),
+                    '/profile'
+                );
+                $data->setPathImage($file);
+            }
+            $this->em->persist($data);
             $this->em->flush();
         }
 

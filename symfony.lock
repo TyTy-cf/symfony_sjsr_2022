@@ -41,6 +41,9 @@
     "knplabs/knp-paginator-bundle": {
         "version": "v5.8.0"
     },
+    "lexik/form-filter-bundle": {
+        "version": "v7.0.3"
+    },
     "phpunit/phpunit": {
         "version": "9.5",
         "recipe": {

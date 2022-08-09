@@ -1,0 +1,61 @@
+{% extends 'back/base.html.twig' %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}
+    Nouveau jeu
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-primary my-3 float-end"
+               href="{{ path('app_admin_game_index') }}"
+            >
+                Les jeux
+            </a>
+        </div>
+
+        <div class="mt-3">
+            {{ form_start(form) }}
+                <div class="row">
+                    <div class="col-lg-4">
+                        {{ form_row(form.name) }}
+                    </div>
+                    <div class="col-lg-4">
+                        {{ form_row(form.publisher) }}
+                    </div>
+                    <div class="col-lg-2">
+                        {{ form_row(form.publishedAt) }}
+                    </div>
+                    <div class="col-lg-2">
+                        {{ form_row(form.price) }}
+                    </div>
+                </div>
+                {{ form_row(form.description) }}
+                <div class="row">
+                    <div class="col-lg-6">
+                        {{ form_row(form.thumbnailCover) }}
+                    </div>
+                    <div class="col-lg-6">
+                        {{ form_row(form.thumbnailLogo) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        {{ form_row(form.countries) }}
+                        {{ form_row(form.addCountry) }}
+                    </div>
+                    <div class="col-lg-6">
+                        {{ form_row(form.genres) }}
+                        {{ form_row(form.addGenre) }}
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+
+{% endblock %}

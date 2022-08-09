@@ -1,0 +1,91 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+    Les jeux
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        {{ form_start(filters) }}
+        <table class="table table-dark table-hover table-striped mt-3">
+            <thead>
+            <tr>
+                <th>
+                    {{
+                    knp_pagination_sortable(
+                        games,
+                        'Nom',
+                        'game.name'
+                    )|raw
+                    }}
+                    {{ form_widget(filters.name) }}
+                </th>
+                <th>
+                    {{
+                    knp_pagination_sortable(
+                        games,
+                        'Editeur',
+                        'publisher.name'
+                    )|raw
+                    }}
+                    {{ form_widget(filters.publisher) }}
+                </th>
+                <th>
+                    {{
+                    knp_pagination_sortable(
+                        games,
+                        'Prix',
+                        'game.price'
+                    )|raw
+                    }}
+                    {{ form_widget(filters.price) }}
+                </th>
+                <th>
+                    {{
+                    knp_pagination_sortable(
+                        games,
+                        'Sorti le',
+                        'game.publishedAt'
+                    )|raw
+                    }}
+                    {{ form_widget(filters.publishedAt) }}
+                </th>
+                <th>
+                    <div>
+                        <button type="submit" class="filter-action">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                        <a class="filter-action" href="{{ path('app_admin_game_index') }}">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for game in games %}
+                <tr>
+                    <td>{{ game.name }}</td>
+                    <td>
+                        {% if game.publisher is not null %}
+                            {{ game.publisher.name }}
+                        {% else %}
+                            Editeur inconnu
+                        {% endif %}
+                    </td>
+                    <td>{{ game.price }}€</td>
+                    <td>{{ game.publishedAt | date('d/m/Y') }}</td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ form_end(filters) }}
+
+        <div class="navigation d-flex justify-content-center mt-2">
+            {{ knp_pagination_render(games) }}
+        </div>
+    </div>
+
+{% endblock %}

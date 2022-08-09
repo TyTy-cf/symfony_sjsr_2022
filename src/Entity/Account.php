@@ -25,6 +25,9 @@ class Account
     #[ORM\Column(type: 'string', length: 180, nullable: true)]
     private ?string $nickname;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $pathImage;
+
     #[ORM\Column(type: 'float')]
     private float $wallet;
 
@@ -63,6 +66,17 @@ class Account
     {
         $this->email = $email;
 
+        return $this;
+    }
+
+    public function getPathImage(): ?string
+    {
+        return $this->pathImage;
+    }
+
+    public function setPathImage(?string $pathImage): Account
+    {
+        $this->pathImage = $pathImage;
         return $this;
     }
 
