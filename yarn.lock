@@ -1669,6 +1669,11 @@ chrome-trace-event@^1.0.2:
   resolved "https://registry.yarnpkg.com/chrome-trace-event/-/chrome-trace-event-1.0.3.tgz#1015eced4741e15d06664a957dbbf50d041e26ac"
   integrity sha512-p3KULyQg4S7NIHixdwbGX+nFHkoBiA4YQmyWtjb8XngSKV124nJmRysgAeujbUVb15vh+RvFUfCPqU7rXk+hZg==
 
+ckeditor4@^4.19.1:
+  version "4.19.1"
+  resolved "https://registry.yarnpkg.com/ckeditor4/-/ckeditor4-4.19.1.tgz#73e786c4194e9ee6072a0fa267ac32f230d69174"
+  integrity sha512-eK/tilHSUpLc9mrD7Lvt07LJfJ13BBa4ftxJBxIX49sGMlWg5WaB81C+MRBZwnntcfpjVdyCLpZAptAHTDB65Q==
+
 clean-webpack-plugin@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/clean-webpack-plugin/-/clean-webpack-plugin-4.0.0.tgz#72947d4403d452f38ed61a9ff0ada8122aacd729"

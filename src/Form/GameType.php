@@ -7,6 +7,7 @@ use App\Entity\Game;
 use App\Entity\Genre;
 use App\Entity\Publisher;
 use Doctrine\ORM\EntityRepository;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
@@ -44,11 +45,8 @@ class GameType extends AbstractType
                     'min' => 0
                 ],
             ])
-            ->add('description', TextareaType::class, [
+            ->add('description', CKEditorType::class, [
                 'label' => 'Description',
-                'attr' => [
-                    'placeholder' => 'Description'
-                ]
             ])
             ->add('thumbnailCover', TextType::class, [
                 'label' => 'Image de couverture',
