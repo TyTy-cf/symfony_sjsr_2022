@@ -74,4 +74,24 @@ class GameController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/edit/{slug}', name: 'app_admin_game_edit')]
+    public function edit(Request $request, Game $game): Response
+    {
+        $form = $this->createForm(GameType::class, $game);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Game $data */
+            $data = $form->getData();
+            $data->setSlug($this->textService->slugify($data->getName()));
+            $this->em->persist($data);
+            $this->em->flush();
+            return $this->redirectToRoute('app_admin_game_index');
+        }
+
+        return $this->render('back/game/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }

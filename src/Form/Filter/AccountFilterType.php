@@ -11,7 +11,6 @@ use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\NumberFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\TextFilterType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AccountFilterType extends AbstractType
 {
@@ -51,11 +50,6 @@ class AccountFilterType extends AbstractType
                 ]
             ])
         ;
-    }
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([]);
     }
 
 }

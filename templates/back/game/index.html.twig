@@ -76,7 +76,11 @@
                     </td>
                     <td>{{ game.price }}€</td>
                     <td>{{ game.publishedAt | date('d/m/Y') }}</td>
-                    <td></td>
+                    <td>
+                        <a href="{{ path('app_admin_game_edit', {'slug': game.slug}) }}">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

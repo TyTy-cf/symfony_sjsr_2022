@@ -5,6 +5,7 @@ namespace App\Controller\Front;
 use App\Repository\CommentRepository;
 use App\Repository\GameRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,10 @@ class GameController extends AbstractController
     ) { }
 
     #[Route('/', name: 'app_game_index')]
-    public function index(): Response {
+    public function index(
+        PaginatorInterface $paginator,
+        FilterBuilderUpdaterInterface $builderUpdater
+    ): Response {
         return $this->render('front/game/index.html.twig', [
             'gamesArray' => $this->gameRepository->findBy([], ['publishedAt' => 'DESC']),
         ]);

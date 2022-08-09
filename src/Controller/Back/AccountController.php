@@ -36,6 +36,8 @@ class AccountController extends AbstractController
             // ->andWhere('account.email LIKE '%hotmail%')
         }
 
+        dump($qb);
+
         $accounts = $paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
