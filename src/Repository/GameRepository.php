@@ -60,6 +60,7 @@ class GameRepository extends AbstractVapeurIshRepository
         $qb = parent::getQbAll();
         return $qb->select('game', 'publisher')
             ->leftJoin('game.publisher', 'publisher')
+            ->orderBy('game.publishedAt', 'DESC')
         ;
     }
 }

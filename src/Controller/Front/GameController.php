@@ -2,6 +2,7 @@
 
 namespace App\Controller\Front;
 
+use App\Form\Filter\GameSearchFilterType;
 use App\Repository\CommentRepository;
 use App\Repository\GameRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -22,10 +23,32 @@ class GameController extends AbstractController
     #[Route('/', name: 'app_game_index')]
     public function index(
         PaginatorInterface $paginator,
-        FilterBuilderUpdaterInterface $builderUpdater
+        FilterBuilderUpdaterInterface $builderUpdater,
+        Request $request
     ): Response {
+
+        $qb = $this->gameRepository->getQbAll();
+
+        $filterForm = $this->createForm(
+            GameSearchFilterType::class,
+            null,
+            ['method' => 'GET']
+        );
+
+        if ($request->query->has($filterForm->getName())) {
+            $filterForm->submit($request->query->get($filterForm->getName()));
+            $builderUpdater->addFilterConditions($filterForm, $qb);
+        }
+
+        $games = $paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            9
+        );
+
         return $this->render('front/game/index.html.twig', [
-            'gamesArray' => $this->gameRepository->findBy([], ['publishedAt' => 'DESC']),
+            'gamesArray' => $games,
+            'filterForm' => $filterForm->createView(),
         ]);
     }
 
