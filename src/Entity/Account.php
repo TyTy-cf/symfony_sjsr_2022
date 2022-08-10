@@ -195,4 +195,13 @@ class Account
         return $totalGameTime;
     }
 
+    public function getTotalLibraryPrice(): int {
+        $totalLibraryPrice = 0;
+        foreach ($this->libraries as $library) {
+            /** @var Library $library */
+            $totalLibraryPrice += $library->getGame()->getPrice();
+        }
+        return $totalLibraryPrice;
+    }
+
 }
