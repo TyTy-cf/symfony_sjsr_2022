@@ -1,0 +1,27 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+    {{ genre.name }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid my-2">
+        <h1>{{ genre.name }}</h1>
+
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-primary my-3 float-end"
+               href="{{ path('app_admin_genre_index') }}"
+            >
+                Les genres
+            </a>
+        </div>
+
+        {#   afficher les jeux de ce genre #}
+
+        <a href="{{ path('app_admin_genre_edit', {'slug': genre.slug}) }}">edit</a>
+
+        {{ include('back/genre/_delete_form.html.twig') }}
+    </div>
+
+{% endblock %}

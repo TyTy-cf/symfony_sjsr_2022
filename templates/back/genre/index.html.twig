@@ -1,0 +1,55 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+    Les genres
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid my-2">
+
+        <h1>Les genres</h1>
+
+        <div class="d-flex justify-content-end">
+            <a  class="btn btn-primary my-3 float-end"
+                href="{{ path('app_admin_genre_new') }}"
+            >
+                Nouveau
+            </a>
+        </div>
+
+        <table class="table table-hover table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Slug</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for genre in genres %}
+                <tr>
+                    <td>{{ genre.id }}</td>
+                    <td>{{ genre.name }}</td>
+                    <td>{{ genre.slug }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_genre_show', {'slug': genre.slug}) }}">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a href="{{ path('app_admin_genre_edit', {'slug': genre.slug}) }}">
+                            <i class="fa fa-pen"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

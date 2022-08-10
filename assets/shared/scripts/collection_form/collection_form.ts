@@ -11,7 +11,7 @@ window.addEventListener('load', function () {
                 newWidget = newWidget.replace(/__name__/g, counter.toString());
                 counter++;
                 list.setAttribute('widget-counter', counter.toString());
-                let newDiv = document.createElement('div');
+                let newDiv: HTMLDivElement = document.createElement('div');
                 newDiv.innerHTML = newWidget;
                 list.appendChild(newDiv);
             });

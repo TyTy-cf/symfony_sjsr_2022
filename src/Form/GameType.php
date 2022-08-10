@@ -56,11 +56,13 @@ class GameType extends AbstractType
             ])
             ->add('thumbnailLogo', TextType::class, [
                 'label' => 'Logo',
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Logo'
                 ]
             ])
             ->add('publisher', EntityType::class, [
+                'required' => false,
                 'class' => Publisher::class,
                 'choice_label' => 'name',
                 'query_builder' => function (EntityRepository $er) {

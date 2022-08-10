@@ -15,6 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AccountRepository extends AbstractVapeurIshRepository
 {
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Account::class);
@@ -48,6 +49,20 @@ class AccountRepository extends AbstractVapeurIshRepository
             ->leftJoin('account.libraries', 'libraries')
             ->leftJoin('account.country', 'country')
             ->groupBy('account')
+        ;
+    }
+
+    /**
+     * @param string $image image name searched in DB
+     * @return Account|null
+     * @throws NonUniqueResultException
+     */
+    public function findAccountForImage(string $image): ?Account {
+        return $this->createQueryBuilder('a')
+            ->where('a.pathImage LIKE :image')
+            ->setParameter('image', '%'.$image.'%')
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 }

@@ -1,0 +1,27 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}
+    Modifier un genre
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid my-2">
+
+        <h1>Modifier un genre</h1>
+
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-primary my-3 float-end"
+               href="{{ path('app_admin_genre_index') }}"
+            >
+                Les genres
+            </a>
+        </div>
+
+        {{ include('back/genre/_form.html.twig', {'button_label': 'Update'}) }}
+
+        {{ include('back/genre/_delete_form.html.twig') }}
+
+    </div>
+
+{% endblock %}
