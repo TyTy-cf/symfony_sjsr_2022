@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Repository\AccountRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -35,25 +36,27 @@ class DeleteImageCommand extends Command
 //        ;
 //    }
 
+    /**
+     * @throws NonUniqueResultException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
         $count = 0;
-
         $fs = new Filesystem();
         $finder = new Finder();
-        $finder->files()->in($this->uploadsDir.'/profile');
-        $finder->name(['*.png', '*.jpeg', '*.jpg']);
-        dump($finder->files());
-        if ($finder->hasResults()) {
+        $finder->name(['*.png', '*.jpeg', '*.jpg']); // filtrer que ce format de fichier
+
+        foreach ($finder->files()->in($this->uploadsDir.'/profile') as $file) {
             /** @var SplFileInfo $file */
-            $file = $finder->getIterator()->current();
-            dump($file);
+            if (null === $this->accountRepository->findAccountForImage($file->getFilename())) {
+                if ($fs->exists($file)) {
+                    $fs->remove($file);
+                    $count++;
+                }
+            }
         }
-//        if ($fs->exists($fileName)) {
-//            $fs->remove($fileName);
-//        }
 
         $io->success(sprintf('Deleted "%d" old images.', $count));
 
