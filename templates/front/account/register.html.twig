@@ -8,16 +8,19 @@
 
 {% block body %}
 
-    <div class="container">
-        <h5 class="my-3">
+    <div class="container mx-auto">
+        <h5 class="my-3 text-center">
             Inscription
         </h5>
-
-        <div class="col-6 mt-3">
-            {{ form_start(form) }}
-            {{ form_end(form) }}
+        <div class="row mt-3">
+            <div class="col-4">
+                <img class="img-fluid" src="{{ image }}" alt="bébou">
+            </div>
+            <div class="col-8 mt-5">
+                {{ form_start(form) }}
+                {{ form_end(form) }}
+            </div>
         </div>
-
     </div>
 
 {% endblock %}

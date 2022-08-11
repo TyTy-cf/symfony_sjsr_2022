@@ -111,7 +111,11 @@
                         <td>{{ account[0].createdAt | date('d/m/Y') }}</td>
                         <td>{{ account[0].wallet }}€</td>
                         <td>{{ account['nbGames'] }}</td>
-                        <td></td>
+                        <td>
+                            <a target="_blank" href="{{ path('app_pdf_library', {'slug': account[0].slug}) }}">
+                                <i class="fa-solid fa-file-pdf"></i>
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

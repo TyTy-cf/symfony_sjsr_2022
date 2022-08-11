@@ -1,0 +1,44 @@
+
+{% set absoluteUrl = app.request.scheme ~'://' ~ app.request.httpHost %}
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Bibliothèque de {{ account.name }}</title>
+        <link rel="stylesheet" type="text/css"
+              href="{{ absoluteUrl ~ asset('build/back_styles.css') }}"
+        >
+    </head>
+    <body class="main-pdf">
+        <div>
+            <h1 class="text-center my-3">Bibliothèque de {{ account.name }}</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Temps de jeu</th>
+                        <th>Prix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for library in account.libraries %}
+                        <tr>
+                            <td>{{ library.game.name }}</td>
+                            <td>{{ library.gameTime|time_converter }}</td>
+                            <td>{{ library.game.price }}€</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <td class="fw-bold">{{ account.totalGameTime|time_converter }}</td>
+                        <td class="fw-bold">{{ account.totalLibraryPrice }}€</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

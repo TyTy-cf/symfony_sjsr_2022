@@ -1,0 +1,16 @@
+knp_snappy:
+
+  # dossier temporaire des pdfs
+  temporary_folder: "%kernel.cache_dir%/snappy"
+
+  # timeout de génération des pdfs
+  process_timeout: 60
+
+  pdf:
+    enabled:    true
+    binary:     'C:/Developpement/wkhtmltox/bin/wkhtmltopdf.exe'
+    options:    []
+  image:
+    enabled:    true
+    binary:     'C:/Developpement/wkhtmltox/bin/wkhtmltoimage.exe'
+    options:    []
