@@ -93,7 +93,7 @@ class GameType extends AbstractType
             ->add('addCountry', ButtonType::class, [
                 'label' => 'Ajouter un pays',
                 'attr' => [
-                    'class' => 'btn btn-info',
+                    'class' => 'btn btn-primary',
                     'data-btn-selector' => 'countries',
                 ]
             ])
@@ -119,7 +119,7 @@ class GameType extends AbstractType
             ->add('addGenre', ButtonType::class, [
                 'label' => 'Ajouter un genre',
                 'attr' => [
-                    'class' => 'btn btn-info',
+                    'class' => 'btn btn-primary',
                     'data-btn-selector' => 'genres',
                 ]
             ])

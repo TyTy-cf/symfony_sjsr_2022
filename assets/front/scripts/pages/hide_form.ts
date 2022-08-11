@@ -1,6 +1,7 @@
 
 function hideShowFormProfile() {
-    const btnHideShow: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.btn-hide-show');
+    // Selector de "data-" attributes : entre crochets !
+    const btnHideShow: NodeListOf<HTMLButtonElement> = document.querySelectorAll('[data-btn-hide-show]');
     if (btnHideShow) {
         btnHideShow.forEach((btn) => {
             btn.addEventListener('click', () => {

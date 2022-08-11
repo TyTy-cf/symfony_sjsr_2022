@@ -6,12 +6,14 @@
     <head>
         <meta charset="UTF-8">
         <title>Bibliothèque de {{ account.name }}</title>
-        <link rel="stylesheet" type="text/css" href="{{ absoluteUrl ~ asset('build/back_styles.css') }}">
+        <link rel="stylesheet" type="text/css"
+              href="{{ absoluteUrl ~ asset('build/back_styles.css') }}"
+        >
     </head>
-    <body>
-        <div class="main-pdf">
-            <h1 class="text-center">Bibliothèque de {{ account.name }}</h1>
-            <table class="table table-striped table-dark">
+    <body class="main-pdf">
+        <div>
+            <h1 class="text-center my-3">Bibliothèque de {{ account.name }}</h1>
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Nom</th>
@@ -32,8 +34,8 @@
                     </tr>
                     <tr>
                         <th>Total</th>
-                        <td>{{ account.totalGameTime|time_converter }}</td>
-                        <td>{{ account.totalLibraryPrice }}€</td>
+                        <td class="fw-bold">{{ account.totalGameTime|time_converter }}</td>
+                        <td class="fw-bold">{{ account.totalLibraryPrice }}€</td>
                     </tr>
                 </tbody>
             </table>

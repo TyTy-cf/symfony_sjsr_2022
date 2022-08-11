@@ -13,13 +13,13 @@ class HttpClientConnector
     /**
      * @throws TransportExceptionInterface
      */
-    public function urlConnect($url): ResponseInterface
+    public function urlConnect(string $url): ResponseInterface
     {
         $client = HttpClient::create();
         $response = $client->request('GET', $url);
 
         if (200 !== $response->getStatusCode()) {
-            throw new Exception('The API return an error.');
+            throw new Exception('Failed to connect to the url ' .$url);
         }
 
         return $response;

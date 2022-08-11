@@ -9,7 +9,7 @@ class FileUploader
 
     /**
      * FileUploader constructor.
-     * @param string $uploadsDir
+     * @param string $uploadsDir => voir config/services.yaml
      */
     public function __construct(
         private string $uploadsDir
