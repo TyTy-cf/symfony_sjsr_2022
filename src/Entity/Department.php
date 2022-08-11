@@ -16,7 +16,7 @@ class Department
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 2)]
+    #[ORM\Column(length: 3)]
     private ?string $code = null;
 
     public function getId(): ?int

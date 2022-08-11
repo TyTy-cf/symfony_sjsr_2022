@@ -2,6 +2,8 @@
 
 namespace App\Command;
 
+use App\Entity\Department;
+use App\Repository\DepartmentRepository;
 use App\Service\HttpClientConnector;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -25,7 +27,8 @@ class DepartmentCommand extends Command
 
     public function __construct(
         private HttpClientConnector $httpClientConnector,
-        private EntityManagerInterface $em
+        private EntityManagerInterface $em,
+        private DepartmentRepository $departmentRepository
     )
     {
         parent::__construct();
@@ -43,14 +46,21 @@ class DepartmentCommand extends Command
 
         $jsonDept = $this->httpClientConnector->urlConnect('https://geo.api.gouv.fr/departements/');
         $departments = json_decode($jsonDept->getContent(), true);
+        $countDpt = 0;
 
         foreach ($departments as $department) {
-            // pour chaque tableau de departements du Json
-            // créer un nouveau departement à partir des clés du tableau "nom" et "code"
-            // persister le nouveau departement
+            if (null === $this->departmentRepository->findOneBy(['code' => $department['code']])) {
+                $newDpt = (new Department())
+                    ->setName($department['nom'])
+                    ->setCode($department['code'])
+                ;
+                $this->em->persist($newDpt);
+                $countDpt++;
+            }
         }
+        $this->em->flush();
 
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $io->success($countDpt . ' département(s) ajouté(s)');
 
         return Command::SUCCESS;
     }
