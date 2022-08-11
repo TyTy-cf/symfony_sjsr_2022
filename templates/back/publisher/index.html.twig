@@ -8,8 +8,14 @@
 
     <div class="container-fluid">
 
-        <div class="d-flex justify-content-end">
-            <a  class="btn btn-primary my-3 float-end"
+        <div class="d-flex justify-content-end my-3">
+            <a  class="btn btn-primary me-3"
+                href="{{ path('app_pdf_publisher_turnover') }}"
+                target="_blank"
+            >
+                PDF du CA des éditeurs
+            </a>
+            <a  class="btn btn-primary"
                 href="{{ path('app_admin_publisher_new') }}"
             >
                 Ajouter un éditeur

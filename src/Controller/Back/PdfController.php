@@ -3,6 +3,7 @@
 namespace App\Controller\Back;
 
 use App\Entity\Account;
+use App\Repository\PublisherRepository;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Knp\Snappy\Pdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,6 +27,23 @@ class PdfController extends AbstractController
         return new PdfResponse(
             $knpSnappyPdf->getOutputFromHtml($html),
             $account->getName().uniqid().'.pdf'
+        );
+    }
+
+    #[Route('/pdf/publisher/turnover', name: 'app_pdf_publisher_turnover')]
+    public function pdfPublisherTurnover(
+        Pdf $knpSnappyPdf,
+        PublisherRepository $publisherRepository
+    ): Response
+    {
+
+        $html = $this->renderView('back/pdf/publisher.html.twig', [
+            'publishers'  => $publisherRepository->getPublisherTurnover()
+        ]);
+
+        return new PdfResponse(
+            $knpSnappyPdf->getOutputFromHtml($html),
+            'publisher_turnover'.uniqid().'.pdf'
         );
     }
 

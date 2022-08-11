@@ -1,0 +1,34 @@
+
+{% set absoluteUrl = app.request.scheme ~'://' ~ app.request.httpHost %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>CA des éditeurs</title>
+    <link rel="stylesheet" type="text/css"
+          href="{{ absoluteUrl ~ asset('build/back_styles.css') }}"
+    >
+</head>
+<body class="main-pdf">
+<div>
+    <h1 class="text-center my-3">Chiffre d'affaire des éditeurs</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Editeur</th>
+            <th>Chiffre d'affaire</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for publisher in publishers %}
+            <tr>
+                <td>{{ publisher[0].name }}</td>
+                <td>{{ publisher[1] }}€</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
