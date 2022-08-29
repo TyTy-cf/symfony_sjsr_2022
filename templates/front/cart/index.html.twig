@@ -1,0 +1,59 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Mon panier</h1>
+
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th>
+                        Jeu
+                    </th>
+                    <th>
+                        Prix/u
+                    </th>
+                    <th>
+                        Quantité
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for gameItem in games %}
+                <tr>
+                    <td>
+                        {{ gameItem['game'].name }}
+                    </td>
+                    <td>
+                        {{ gameItem['game'].price }}€
+                    </td>
+                    <td>
+                        {{ gameItem['qty'] }}
+                    </td>
+                    <td>
+                        {{ gameItem['qty'] * gameItem['game'].price }}€
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if games|length > 0 %}
+            <div class="d-flex justify-content-end">
+                <a class="btn btn-danger" href="{{ path('app_delete_cart') }}">
+                    Vider mon panier
+                </a>
+                <a class="btn btn-primary" href="{{ path('app_payment_cart') }}">
+                    Payer
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

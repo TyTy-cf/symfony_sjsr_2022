@@ -20,7 +20,17 @@
             <p class="realPrice">{{ game.price }}€</p>
         </div>
         <div class="card_buy">
-            <a href="#" class="btn">Acheter</a>
+            <input  type="number"
+                    min="1"
+                    value="1"
+                    class="form-control"
+                    data-input-add-game="{{ game.id }}"
+            >
+            <button class="btn"
+                    data-game-id="{{ game.id }}"
+            >
+                Acheter
+            </button>
         </div>
     </div>
 </div>
