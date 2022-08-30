@@ -43,12 +43,16 @@ class Account
     #[ORM\ManyToOne(targetEntity: Country::class)]
     private ?Country $country;
 
+    #[ORM\ManyToMany(targetEntity: Game::class)]
+    private Collection $favorites;
+
     public function __construct()
     {
         $this->libraries = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->wallet = 0.0;
         $this->createdAt = new DateTime();
+        $this->favorites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -202,6 +206,39 @@ class Account
             $totalLibraryPrice += $library->getGame()->getPrice();
         }
         return $totalLibraryPrice;
+    }
+
+    /**
+     * @return Collection<int, Game>
+     */
+    public function getFavorites(): Collection
+    {
+        return $this->favorites;
+    }
+
+    public function addFavorite(Game $favorite): self
+    {
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites->add($favorite);
+        }
+
+        return $this;
+    }
+
+    public function addToFavorite(Game $game): bool {
+        if (!$this->favorites->contains($game)) {
+            $this->favorites->add($game);
+            return true;
+        }
+        $this->favorites->removeElement($game);
+        return false;
+    }
+
+    public function removeFavorite(Game $favorite): self
+    {
+        $this->favorites->removeElement($favorite);
+
+        return $this;
     }
 
 }

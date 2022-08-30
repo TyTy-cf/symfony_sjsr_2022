@@ -2,6 +2,10 @@
 
 namespace App\Controller\Front;
 
+use App\Repository\AccountRepository;
+use App\Repository\GameRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,6 +62,26 @@ class AjaxController extends AbstractController
         $session->set(self::$QTY, $qtyTotal);
 
         return new JsonResponse(['qtyTotale' => $qtyTotal]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    #[Route('/addToFavorite/{datas}', name: 'ajax_add_item_to_favorite')]
+    public function addToFavorite(
+        Request $request,
+        GameRepository $gameRepository,
+        AccountRepository $accountRepository,
+        EntityManagerInterface $em
+    ): Response
+    {
+        $datas = json_decode($request->get('datas'), true);
+        $game = $gameRepository->findOneBy(['id' => $datas['gameId']]);
+        $user = $accountRepository->findOneBy(['id' => 606]);
+        // $user = $this->getUser();
+        $isAdded = $user->addToFavorite($game);
+        $em->flush();
+        return new JsonResponse(['OK' => $isAdded]);
     }
 
 }

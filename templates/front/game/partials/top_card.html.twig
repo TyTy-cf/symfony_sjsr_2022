@@ -26,10 +26,18 @@
                     class="form-control"
                     data-input-add-game="{{ game.id }}"
             >
-            <button class="btn"
+            <button class="btn my-2"
                     data-game-id="{{ game.id }}"
             >
                 Acheter
+            </button>
+        </div>
+        <div class="card_buy">
+            <button class="btn"
+                    data-game-favorite-id="{{ game.id }}"
+            >
+                <i class="fa fa-star"></i>
+                Favoris
             </button>
         </div>
     </div>
