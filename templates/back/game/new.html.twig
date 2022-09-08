@@ -44,13 +44,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         {{ form_row(form.countries) }}
                         {{ form_row(form.addCountry) }}
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         {{ form_row(form.genres) }}
                         {{ form_row(form.addGenre) }}
+                    </div>
+                    <div class="col-lg-4">
+                        {{ form_row(form.entityImages) }}
+                        {{ form_row(form.addImage) }}
                     </div>
                 </div>
             {{ form_end(form) }}

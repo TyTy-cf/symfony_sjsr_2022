@@ -49,6 +49,7 @@ class AccountController extends AbstractController
             /** @var Account $data */
             $data = $form->getData();
             if ($form->get('pathImage')->getData() !== null) {
+                // $file = chemin complet de l'image sur le serveur
                 $file = $fileUploader->uploadFile(
                     $form->get('pathImage')->getData(),
                     '/profile'

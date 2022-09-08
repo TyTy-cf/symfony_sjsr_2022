@@ -47,11 +47,15 @@ class Game
     #[ORM\JoinColumn(nullable: true)]
     private ?Publisher $publisher;
 
+    #[ORM\OneToMany(mappedBy: 'game', targetEntity: EntityImage::class)]
+    private Collection $entityImages;
+
     public function __construct()
     {
         $this->countries = new ArrayCollection();
         $this->genres = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->entityImages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -206,6 +210,36 @@ class Game
     public function setPublishedAt(DateTime $publishedAt): Game
     {
         $this->publishedAt = $publishedAt;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EntityImage>
+     */
+    public function getEntityImages(): Collection
+    {
+        return $this->entityImages;
+    }
+
+    public function addEntityImage(EntityImage $entityImage): self
+    {
+        if (!$this->entityImages->contains($entityImage)) {
+            $this->entityImages->add($entityImage);
+            $entityImage->setGame($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEntityImage(EntityImage $entityImage): self
+    {
+        if ($this->entityImages->removeElement($entityImage)) {
+            // set the owning side to null (unless already changed)
+            if ($entityImage->getGame() === $this) {
+                $entityImage->setGame(null);
+            }
+        }
+
         return $this;
     }
 

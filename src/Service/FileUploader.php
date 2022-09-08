@@ -22,6 +22,9 @@ class FileUploader
         $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
         $uploadedFile->move($destination, $newFilename);
         return '/uploads'.$namespace.'/'.$newFilename;
+//        return (new EntityImage())
+//            ->setPath($file)
+//        ;
     }
 
 }

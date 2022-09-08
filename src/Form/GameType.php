@@ -13,12 +13,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class GameType extends AbstractType
 {
@@ -121,6 +123,34 @@ class GameType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary',
                     'data-btn-selector' => 'genres',
+                ]
+            ])
+            ->add('entityImages', CollectionType::class, [
+                'label' => 'Images',
+                'attr' => [
+                    'data-list-selector' => 'images'
+                ],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'entry_type' => FileType::class,
+                'entry_options' => [
+                    'label' => false,
+                    'mapped' => false,
+                    'required' => false,
+                    'constraints' => [
+                        new File(
+                            maxSize: '2048k',
+                            mimeTypes: ['image/png', 'image/jpeg'],
+                            mimeTypesMessage: 'Ce format d\'image n\'est pas pris en compte',
+                        )
+                    ]
+                ]
+            ])
+            ->add('addImage', ButtonType::class, [
+                'label' => 'Ajouter une image',
+                'attr' => [
+                    'class' => 'btn btn-primary',
+                    'data-btn-selector' => 'images',
                 ]
             ])
             ->add('submit', SubmitType::class, [

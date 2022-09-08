@@ -43,7 +43,7 @@ class PdfController extends AbstractController
 
         return new PdfResponse(
             $knpSnappyPdf->getOutputFromHtml($html),
-            'publisher_turnover'.uniqid().'.pdf'
+            'publisher_turnover_'.uniqid().'.pdf'
         );
     }
 

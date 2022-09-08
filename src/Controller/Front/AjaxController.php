@@ -61,6 +61,9 @@ class AjaxController extends AbstractController
         }
         $session->set(self::$QTY, $qtyTotal);
 
+//        $request->headers['referer'] => URL d'où provient la request
+//        return $this->redirect($request->headers['referer']);
+
         return new JsonResponse(['qtyTotale' => $qtyTotal]);
     }
 

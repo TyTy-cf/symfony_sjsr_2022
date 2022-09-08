@@ -2,10 +2,12 @@
 
 namespace App\Controller\Back;
 
+use App\Entity\EntityImage;
 use App\Entity\Game;
 use App\Form\Filter\GameFilterType;
 use App\Form\GameType;
 use App\Repository\GameRepository;
+use App\Service\FileUploader;
 use App\Service\TextService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -56,7 +58,7 @@ class GameController extends AbstractController
     }
 
     #[Route('/new', name: 'app_admin_game_new')]
-    public function new(Request $request): Response
+    public function new(Request $request, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(GameType::class, new Game());
         $form->handleRequest($request);
@@ -65,6 +67,19 @@ class GameController extends AbstractController
             /** @var Game $data */
             $data = $form->getData();
             $data->setSlug($this->textService->slugify($data->getName()));
+            if ($form->get('entityImages')->getData() !== null) {
+                foreach ($form->get('entityImages') as $formImage) {
+                    $file = $fileUploader->uploadFile(
+                        $formImage->getData(),
+                        '/game'
+                    );
+                    $image = (new EntityImage())
+                        ->setPath($file)
+                    ;
+                    $this->em->persist($image);
+                    $data->addEntityImage($image);
+                }
+            }
             $this->em->persist($data);
             $this->em->flush();
             return $this->redirectToRoute('app_admin_game_index');
