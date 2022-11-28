@@ -5,12 +5,14 @@ namespace App\Entity;
 use App\Repository\LibraryRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: LibraryRepository::class)]
 class Library
 {
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
+    #[Groups('account:list')]
     private ?int $id = null;
 
     #[ORM\Column(type: 'boolean', options: ['default' => 0])]

@@ -2,42 +2,77 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\AccountRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
-#[UniqueEntity(fields: 'email'), UniqueEntity(fields: 'name')]
+#[UniqueEntity(fields: 'email'), UniqueEntity(fields: 'name', message: 'Ce nom de compte est déjà utilisé')]
 #[ORM\Entity(repositoryClass: AccountRepository::class)]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'normalization_context' => [
+                'groups' => 'account:list'
+            ]
+        ],
+        'post' => [
+            'denormalization_context' => [
+                'groups' => 'account:post'
+            ]
+        ]
+    ],
+    itemOperations: [
+        'get'
+    ],
+)]
+#[ApiFilter(
+    SearchFilter::class, properties: [
+        'slug' => 'exact',
+    ]
+)]
 class Account
 {
 
     use VapeurIshEntity;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
+    #[Groups('account:list')]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Assert\NotBlank(message: 'L\'email ne peut pas être vide')]
+    #[Groups(['account:list', 'account:post'])]
     private string $email;
 
     #[ORM\Column(type: 'string', length: 180, nullable: true)]
+    #[Assert\NotBlank(message: 'Le pseudo ne peut pas être vide')]
+    #[Groups(['account:list', 'account:post'])]
     private ?string $nickname;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $pathImage;
 
     #[ORM\Column(type: 'float')]
+    #[Groups('account:list')]
     private float $wallet;
 
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: Library::class)]
+    #[Groups('account:list')]
     private Collection $libraries;
 
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: Comment::class)]
     private Collection $comments;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups('account:list')]
     protected DateTime $createdAt;
 
     #[ORM\ManyToOne(targetEntity: Country::class)]
@@ -206,6 +241,11 @@ class Account
             $totalLibraryPrice += $library->getGame()->getPrice();
         }
         return $totalLibraryPrice;
+    }
+
+    #[Groups('account:list')]
+    public function getTotalGamesLibrary(): int {
+        return count($this->libraries);
     }
 
     /**

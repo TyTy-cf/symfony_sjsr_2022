@@ -2,18 +2,32 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\DepartmentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: DepartmentRepository::class)]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'normalization_context' => [
+                'groups' => 'department:list'
+            ]
+        ]
+    ],
+    itemOperations: ['get'],
+)]
 class Department
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('department:list')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('department:list')]
     private ?string $name = null;
 
     #[ORM\Column(length: 3)]

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 trait VapeurIshEntity
@@ -11,6 +12,7 @@ trait VapeurIshEntity
     #[Assert\NotBlank]
     #[Assert\Length(min: 3, minMessage: 'Le nom ne peut pas faire moins de {{ limit }} caractères')]
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Groups(['account:list', 'account:post'])]
     private string $name;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
