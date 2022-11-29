@@ -2,29 +2,72 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\CountryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
-#[UniqueEntity(fields: 'name'), UniqueEntity(fields: 'code')]
+#[UniqueEntity(fields: 'name', message: 'Un pays de ce nom existe déjà'), UniqueEntity(fields: 'code')]
 #[ORM\Entity(repositoryClass: CountryRepository::class)]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'normalization_context' => [
+                'groups' => 'country:read'
+            ]
+        ],
+        'post' => [
+            'denormalization_context' => [
+                'groups' => 'country:post'
+            ]
+        ],
+    ],
+    itemOperations: [
+        'get' => [
+            'normalization_context' => [
+                'groups' => 'country:read'
+            ]
+        ],
+        'put' => [
+            'denormalization_context' => [
+                'groups' => 'country:post'
+            ]
+        ],
+    ],
+)]
+#[ApiFilter(
+    SearchFilter::class, properties: [
+        'name' => 'partial', // équivalent d'un LIKE %_%
+        'code' => 'exact', // équivalent d'un =
+    ]
+)]
 class Country
 {
 
     use VapeurIshEntity;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
+    #[Groups('country:read')]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: '128')]
+    #[Groups(['country:read', 'country:post'])]
+    #[Assert\NotBlank(message: 'La nationalité doit être renseignée')]
     private string $nationality;
 
     #[ORM\Column(type: 'string', length: '255', nullable: true)]
+    #[Groups('country:read')]
     private ?string $urlFlag;
 
     #[ORM\Column(type: 'string', length: '2')]
+    #[Groups(['country:read', 'country:post'])]
+    #[Assert\NotBlank(message: 'Le code doit être renseigné')]
     private string $code;
 
     #[ORM\ManyToMany(targetEntity: Game::class, mappedBy: 'countries')]

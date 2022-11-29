@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[UniqueEntity(fields: 'name')]
 #[ORM\Entity(repositoryClass: GameRepository::class)]
@@ -29,6 +30,7 @@ class Game
     private string $description;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups('account:show')]
     private ?string $thumbnailCover;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

@@ -12,19 +12,22 @@ class Library
 {
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
-    #[Groups('account:list')]
     private ?int $id = null;
 
     #[ORM\Column(type: 'boolean', options: ['default' => 0])]
+    #[Groups('account:show')]
     private bool $installed;
 
     #[ORM\Column(type: 'integer', options: ['default' => 0])]
+    #[Groups('account:show')]
     private int $gameTime;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups('account:show')]
     private DateTime $lastUsedAt;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups('account:show')]
     protected ?DateTime $createdAt;
 
     /**
@@ -33,6 +36,7 @@ class Library
      * connaît l'autre entité, mais l'autre entité ne connait pas la classe courante
      */
     #[ORM\ManyToOne(targetEntity: Game::class)]
+    #[Groups('account:show')]
     private Game $game;
 
     /**
