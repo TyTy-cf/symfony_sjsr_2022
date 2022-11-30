@@ -12,11 +12,11 @@ trait VapeurIshEntity
     #[Assert\NotBlank(message: 'Le nom doit être renseigné')]
     #[Assert\Length(min: 3, minMessage: 'Le nom ne peut pas faire moins de {{ limit }} caractères')]
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(['account:list', 'account:post', 'country:read', 'country:post', 'account:show'])]
+    #[Groups(['account:list', 'account:post', 'country:read', 'country:post', 'account:show', 'game:read'])]
     private string $name;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
-    #[Groups(['country:read', 'account:list', 'account:show'])]
+    #[Groups(['country:read', 'account:list', 'account:show', 'game:read'])]
     private string $slug = '';
 
     public function getName(): ?string

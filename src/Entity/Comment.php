@@ -12,25 +12,32 @@ class Comment
 {
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
+    #[Groups(['game:show'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'text')]
+    #[Groups(['game:show'])]
     private string $content;
 
     #[ORM\Column(type: 'integer')]
+    #[Groups(['game:show'])]
     private int $upVotes;
 
     #[ORM\Column(type: 'integer')]
+    #[Groups(['game:show'])]
     private int $downVotes;
 
     #[ORM\Column(type: 'float')]
+    #[Groups(['game:show'])]
     private float $rank;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups(['game:show'])]
     protected DateTime $createdAt;
 
     #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['game:show'])]
     private Account $account;
 
     #[ORM\ManyToOne(targetEntity: Game::class, inversedBy: 'comments')]

@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\GameRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,44 +12,80 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[UniqueEntity(fields: 'name')]
 #[ORM\Entity(repositoryClass: GameRepository::class)]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'normalization_context' => [
+                'groups' => 'game:read'
+            ],
+        ]
+    ],
+    itemOperations: [
+        'get' => [
+            'normalization_context' => [
+                'groups' => [
+                    'game:read',
+                    'game:show'
+                ]
+            ],
+        ]
+    ],
+)]
+#[ApiFilter(
+    SearchFilter::class, properties: [
+        'slug' => 'exact', // équivalent d'un =
+        'name' => 'partial'  // équivalent d'un LIKE %_%
+    ]
+)]
 class Game
 {
 
     use VapeurIshEntity;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
+    #[Groups(['game:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'float')]
+    #[Assert\NotBlank(message: 'Vous devez renseigner un prix')]
+    #[Groups(['game:read'])]
     private float $price;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups(['game:read'])]
+    #[Assert\NotBlank(message: 'Vous devez renseigner la date de sortie')]
     private DateTime $publishedAt;
 
     #[ORM\Column(type: 'text')]
+    #[Groups(['game:show'])]
     private string $description;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups('account:show')]
+    #[Groups(['account:show', 'game:show'])]
     private ?string $thumbnailCover;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $thumbnailLogo;
 
     #[ORM\ManyToMany(targetEntity: Country::class, inversedBy: 'games')]
+    #[Groups(['game:show'])]
     private Collection $countries;
 
     #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'games')]
+    #[Groups(['game:show'])]
     private Collection $genres;
 
     #[ORM\OneToMany(mappedBy: 'game', targetEntity: Comment::class)]
+    #[Groups(['game:show'])]
     private Collection $comments;
 
     #[ORM\ManyToOne(targetEntity: Publisher::class, inversedBy: 'games')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Groups(['game:show'])]
     private ?Publisher $publisher;
 
     #[ORM\OneToMany(mappedBy: 'game', targetEntity: EntityImage::class)]

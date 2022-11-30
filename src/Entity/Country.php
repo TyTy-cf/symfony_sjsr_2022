@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Controller\Api\Country\PostAction;
 use App\Repository\CountryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -25,6 +26,10 @@ use Symfony\Component\Validator\Constraints as Assert;
         'post' => [
             'denormalization_context' => [
                 'groups' => 'country:post'
+            ],
+            'controller' => [
+                PostAction::class,
+                'handle'
             ]
         ],
     ],
@@ -53,16 +58,16 @@ class Country
     use VapeurIshEntity;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
-    #[Groups('country:read')]
+    #[Groups(['game:show', 'country:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: '128')]
-    #[Groups(['country:read', 'country:post'])]
+    #[Groups(['country:read', 'country:post', 'game:show'])]
     #[Assert\NotBlank(message: 'La nationalité doit être renseignée')]
     private string $nationality;
 
     #[ORM\Column(type: 'string', length: '255', nullable: true)]
-    #[Groups('country:read')]
+    #[Groups(['game:show', 'country:read'])]
     private ?string $urlFlag;
 
     #[ORM\Column(type: 'string', length: '2')]
@@ -106,9 +111,10 @@ class Country
     /**
      * @param string $nationality
      */
-    public function setNationality(string $nationality): void
+    public function setNationality(string $nationality): self
     {
         $this->nationality = $nationality;
+        return $this;
     }
 
     /**

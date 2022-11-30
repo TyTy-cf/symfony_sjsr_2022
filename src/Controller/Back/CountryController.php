@@ -5,6 +5,7 @@ namespace App\Controller\Back;
 use App\Entity\Country;
 use App\Form\CountryType;
 use App\Repository\CountryRepository;
+use App\Service\CountryService;
 use App\Service\TextService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -18,8 +19,7 @@ class CountryController extends AbstractController
 {
 
     public function __construct(
-        private TextService $textService,
-        private EntityManagerInterface $entityManager,
+        private CountryService $countryService
     ) { }
 
     #[Route('/', name: 'app_admin_country_index')]
@@ -71,10 +71,7 @@ class CountryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Country $data */
             $data = $form->getData();
-            $data->setSlug($this->textService->slugify($data->getNationality()));
-            $data->setUrlFlag('https://flagcdn.com/32x24/'.$data->getCode().'.png');
-            $this->entityManager->persist($data); // => insert into country
-            $this->entityManager->flush(); // on tire la chasse => COMMIT
+            $this->countryService->create($data);
             return $this->redirectToRoute('app_admin_country_index');
         }
 
