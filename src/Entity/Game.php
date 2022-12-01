@@ -47,12 +47,12 @@ class Game
     use VapeurIshEntity;
 
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
-    #[Groups(['game:read'])]
+    #[Groups(['game:read', 'publisher:read:show'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'float')]
     #[Assert\NotBlank(message: 'Vous devez renseigner un prix')]
-    #[Groups(['game:read'])]
+    #[Groups(['game:read', 'publisher:read:show'])]
     private float $price;
 
     #[ORM\Column(type: 'datetime')]
@@ -65,7 +65,7 @@ class Game
     private string $description;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['account:show', 'game:show'])]
+    #[Groups(['game:read', 'account:show', 'game:show', 'publisher:read:show'])]
     private ?string $thumbnailCover;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

@@ -45,6 +45,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiFilter(
     SearchFilter::class, properties: [
         'slug' => 'exact',
+        'name' => 'partial',
     ]
 )]
 class Account

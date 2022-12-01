@@ -2,11 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CommentRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
+#[ApiResource(
+    collectionOperations: [],
+    itemOperations: []
+)]
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {

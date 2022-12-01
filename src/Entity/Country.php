@@ -70,7 +70,7 @@ class Country
     private string $nationality;
 
     #[ORM\Column(type: 'string', length: '255', nullable: true)]
-    #[Groups(['game:show', 'country:read'])]
+    #[Groups(['game:show', 'country:read', 'publisher:read'])]
     private ?string $urlFlag;
 
     #[ORM\Column(type: 'string', length: '2')]

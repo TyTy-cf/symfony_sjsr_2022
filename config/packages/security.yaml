@@ -22,17 +22,17 @@ security:
                 username_path: email
                 password_path: password
 
-        api:
-            pattern: ^/api
-            stateless: true
-#            jwt: ~
-            guard:
-                authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
+#        api:
+#            pattern: ^/api
+#            stateless: true
+##            jwt: ~
+#            guard:
+#                authenticators:
+#                    - lexik_jwt_authentication.jwt_token_authenticator
 
     access_control:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/docs, roles: PUBLIC_ACCESS }
         - { path: ^/api/register, roles: PUBLIC_ACCESS }
+#        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY  }
 #        - { path: ^/api/accounts, roles: PUBLIC_ACCESS, methods: [POST] }
-        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY  }
