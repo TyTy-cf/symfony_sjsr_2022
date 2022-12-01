@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Controller\Api\Acount\PostAction;
 use App\Repository\AccountRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -26,6 +27,10 @@ use Symfony\Component\Validator\Constraints as Assert;
         'post' => [
             'denormalization_context' => [
                 'groups' => 'account:post'
+            ],
+            'path' => '/register', // change le nom qui apparaît dans le swagger d'API Platform
+            'controller' => [ // redéfinit l'action du post sur la méthode "register" du controller PostAction
+                PostAction::class, 'register'
             ]
         ]
     ],

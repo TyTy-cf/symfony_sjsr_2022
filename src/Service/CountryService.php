@@ -22,11 +22,13 @@ class CountryService
     {
     }
 
-    public function create(Country $country): Country
+    public function create(Country $country, bool $persist = true): Country
     {
         $country->setSlug($this->textService->slugify($country->getName()));
         $country->setUrlFlag('https://flagcdn.com/32x24/'.$country->getCode().'.png');
-        $this->em->persist($country);
+        if ($persist) {
+            $this->em->persist($country);
+        }
         $this->em->flush();
         return $country;
     }

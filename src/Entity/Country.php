@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Api\Country\PostAction;
+use App\Controller\Api\Country\PutAction;
 use App\Repository\CountryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -28,8 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                 'groups' => 'country:post'
             ],
             'controller' => [
-                PostAction::class,
-                'handle'
+                PostAction::class, 'handle'
             ]
         ],
     ],
@@ -42,6 +42,9 @@ use Symfony\Component\Validator\Constraints as Assert;
         'put' => [
             'denormalization_context' => [
                 'groups' => 'country:post'
+            ],
+            'controller' => [
+                PutAction::class, 'edit'
             ]
         ],
     ],
