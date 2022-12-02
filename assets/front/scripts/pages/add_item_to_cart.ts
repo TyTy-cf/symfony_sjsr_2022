@@ -28,11 +28,7 @@ function setUpClickEventAddItem(): void {
                 })
                 .then((data) => {
                     const qtyCart: HTMLParagraphElement = document.querySelector('[data-cart-item]');
-                    let plural: string = ' article';
-                    if (parseInt(data.qtyTotale) > 1) {
-                        plural += 's';
-                    }
-                    qtyCart.innerText = data.qtyTotale + plural;
+                    qtyCart.innerText = data.qtyTotale;
                 });
             });
         });

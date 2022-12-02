@@ -40,6 +40,7 @@ class CartController extends AbstractController
     ): Response
     {
         $session->remove(AjaxController::$CART);
+        $session->remove(AjaxController::$QTY);
         return $this->redirectToRoute('app_home');
     }
 

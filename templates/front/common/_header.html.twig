@@ -23,7 +23,7 @@
             </ul>
         </div>
 
-        <p data-cart-item class="me-2">{{ app.session.get('QTY') }}</p>
+        <p data-cart-item class="me-2">{{ functionGetQuantitySession() }}</p>
         <a class="navbar-brand" href="{{ path('app_cart') }}">
             <i class="fa-solid fa-cart-shopping"></i>
         </a>

@@ -26,23 +26,6 @@ class AjaxController extends AbstractController
         SessionInterface $session
     ): Response
     {
-//        $currentSession = [];
-//        $cart = null;
-//        if (!$session->has(self::$CART)) {
-//            $cart = new Cart();
-//            $em->persist($cart);
-//        } else {
-//            $cart = $session->get(self::$CART)
-//        }
-//        $product = $productRepository->findOneBy(['id' => $datas['id']])
-//        if (!isset($currentSession[$datas['gameId']])) {
-//              $lineProduct = $currentSession[$datas['gameId']];
-//              $lineProduct->setQuantity($lineProduct->getQuantity() + $datas['qty']);
-//         } else {
-//              $datas = new Line()
-//              $datas->setProduct($product)
-//              $datas->setQuantity($datas['qty'])
-//         }
         $datas = json_decode($request->get('datas'), true);
         $currentSession = [];
         if ($session->has(self::$CART)) {
@@ -60,9 +43,6 @@ class AjaxController extends AbstractController
             $qtyTotal += $item;
         }
         $session->set(self::$QTY, $qtyTotal);
-
-//        $request->headers['referer'] => URL d'où provient la request
-//        return $this->redirect($request->headers['referer']);
 
         return new JsonResponse(['qtyTotale' => $qtyTotal]);
     }

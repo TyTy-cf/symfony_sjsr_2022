@@ -9,13 +9,8 @@ function hideShowFormProfile() {
                 const dataClassSecondElem: string = btn.getAttribute('data-class-second-element');
                 const firstHtmlElement: HTMLElement = document.querySelector('.' + dataClassFirstElem);
                 const secondHtmlElement: HTMLElement = document.querySelector('.' + dataClassSecondElem);
-                if (secondHtmlElement.classList.contains('d-none')) {
-                    secondHtmlElement.classList.remove('d-none')
-                    firstHtmlElement.classList.add('d-none')
-                } else {
-                    secondHtmlElement.classList.add('d-none')
-                    firstHtmlElement.classList.remove('d-none')
-                }
+                firstHtmlElement.classList.toggle('d-none');
+                secondHtmlElement.classList.toggle('d-none');
             });
         })
     }
